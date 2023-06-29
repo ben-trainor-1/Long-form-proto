@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Manrope:wght@400;700;800&display=swap');
+
+html {
+    scroll-behavior: auto !important;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, a, li, p, div {
+    font-family: "Instrument Sans", "Times New Roman";
+}
+
+/* Google Material icons */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.main-images {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.nav-link, .nav-link:visited {
+    color: rgb(27, 27, 27);
+}
+
+.nav-link:hover {
+    color: rgb(136, 136, 136);
+}
+
+.nav-link:active {
+    color: rgb(136, 136, 136);
+    background-color: transparent;
+}
+
+.fs-7 {
+    font-size: .8rem;
+}
+
+.bg-warning-light {
+    background-color: rgb(255, 248, 224);
+}
+
+#scrollspy_nav .active-section {
+    text-decoration: underline;
+}
+
+
+/* General form styling */
+input.form-control, select.form-select, textarea.form-control {
+    border-radius: 13px;
+}
+
+div.rounded {
+    border-radius: 13px !important;
+}
+.rounded-start {
+    border-radius: 13px 0px 0px 13px !important;
+}
+
+.btn {
+    border-radius: 13px;
+}
+
+
+/* Edited form control items and inputs */
+input.form-control, select.form-select, textarea.form-control {
+    transition: .3s;
+    background-color: rgb(255, 255, 255);
+}
+
+input.form-control.edited, input.form-control.edited:active, input.form-control.edited:focus, 
+select.edited, select.edited:active, select.edited:focus,
+textarea.edited, textarea.edited:active, textarea.edited:focus {
+    background-color: rgb(251, 245, 200);
+}
+
+input.form-check-input, input.form-check-input:focus {
+    transition: .2s;
+    box-shadow: none;
+}
+
+input.form-check-input.edited, input.form-check-input.edited:active, input.form-check-input.edited:focus,
+.radio-section.edited input:checked {
+    box-shadow: 0px 0px 5px 2px rgb(245, 222, 74);
+}
+
+/* Labels in dark divs */
+div .bg-dark input.edited + label, div .bg-dark label:has(+ input.edited), 
+div .bg-dark label:has(+ input.edited), 
+div .bg-dark .radio-section.edited input:checked + label {
+    filter: drop-shadow(0px 2px 1px rgb(174, 156, 39))
+            drop-shadow(0px 1px 0px rgb(178, 160, 48));
+    color: rgb(255, 255, 255) !important;
+}
+
+
+/* All other labels */
+input.edited + label, label:has(+ input.edited), label:has(+ textarea.edited),
+label:has(+ select.edited), .radio-section.edited input:checked + label {
+    filter: drop-shadow(0px 2px 1px rgb(242, 226, 120))
+            drop-shadow(0px 1px 0px rgb(251, 231, 100));
+    color: rgb(0, 0, 0) !important;
+}
+
+input.edited:disabled {
+    background-color: #e9ecef;
+}
+
+label:has(+ select), label:has(+ input), label:has(+ textarea),
+label:has(+ .form-check) {
+    transition: .1s;
+    font-size: .9rem;
+}
+
+input {
+    max-height: 36px;
+    vertical-align: top !important;
+}
+
+/* Validation */
+input:has(+ .just-validate-error-label), input:focus:has(+ .just-validate-error-label) {
+    border: 1px solid rgb(235, 55, 55);
+}
+input:focus:has(+ .just-validate-error-label) {
+    box-shadow: 0 0 0 .25rem rgba(235, 55, 55, .25);
+}
+.just-validate-error-label {
+    margin: 0px;
+    text-align: center;
+    padding: 0px;
+    font-style: italic;
+    font-size: .85rem;
+    font-weight: 600;
+    /* background-color: rgb(228, 54, 54); */
+    color: rgb(235, 55, 55) !important;
+}
+
+#save_button {
+    transition: .3s;
+}
+
+/* Disabled inputs/selects/checkboxes */
+input:disabled, select:disabled {
+    color: #6d6d6d;
+}
+
+/* Prevent users from highlighting things */
+label, .material-icons, .search-icon, select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Search icon */
+.search-icon {
+    transition: .3s;
+    position: absolute;
+    float: right;
+    margin-top: 27px;
+    margin-left: -6px;
+    width: auto;
+    height: 24px;
+    z-index: 100;
+}
+.form-control:disabled + .search-icon {
+    opacity: 60%;
+}
+.search-input {
+    padding-left: 35px !important;
+}
+
+/* Hacky scroll to stuff */
+.main-form-section, html, div, input, select, textarea {
+    scroll-margin-top: 60px !important;
+}
+
+/* Dropdown menu */
+#dropdown_button {
+    box-shadow: none;
+}
+
+#dropdown_button:focus-visible, #dropdown_button:focus  {
+    background-color: #212529 !important;
+}
+
+.dropdown-menu, .dropdown-menu-dark, .dropdown-menu-end {
+    width: 220px;
+}
+
+.dropdown-menu {
+    border-radius: 13px;
+    /* background-color: rgb(167, 77, 77); */
+}
+
+.dropdown-item {
+    border-radius: 13px;
+    color: #ffffff;
+    transition: .2s;
+}
+
+.dropdown-item:hover {
+    color: #d7d7d7;
+    background-color: rgb(6, 6, 6);
+    /* background-color: rgb(84, 37, 37); */
+}
+
+/* Other colors */
+.bg-insight-primary {
+    background-color: rgb(167, 77, 77);
+}

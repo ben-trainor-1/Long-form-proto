@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body class="row bg-dark m-0 px-md-5 px-1">
+
+    <form action="" class="row col-12 m-0 p-0">
+
+        <div class="row col-12 m-0 p-0 justify-content-center">
+            <div class="col-6 mt-5 p-0">
+
+                <input type="text" name="input1" id="input1" class="form-control m-0 mb-2 p-2" value="Default value">
+                <input type="text" name="input2" id="input2" class="form-control m-0 mb-2 p-2"
+                    value="Default value numero dos">
+                <input type="text" name="input3" id="input3" class="form-control m-0 mb-2 p-2" value="Another input">
+
+                <div class="form-check mb-2 align-items-center">
+                    <input type="checkbox" name="input8" id="input8" class="form-check-input" value="off" checked>
+                    <label for="input8" class="text-light form-check-label">Checkbox</label>
+                </div>
+
+                <input type="text" name="input4" id="input4" class="form-control m-0 mb-2 p-2" value="">
+                <input type="text" name="input5" id="input5" class="form-control m-0 mb-2 p-2" value="">
+                <input type="date" name="date1" id="date1" class="form-control m-0 mb-2 p-2" value="2023-06-02">
+
+                <select name="select1" id="select1" class="form-select m-0 mb-2 p-2">
+                    <option value="1">One</option>
+                    <option value="2" selected>Two</option>
+                    <option value="3">Three</option>
+                </select>
+                <select name="select2" id="select2" class="form-select m-0 mb-2 p-2">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+
+                <div id="radioGroup1" class="text-light m-0 p-0 mb-1 radio-section">
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup1" id="radiobtn1" class="form-check-input" value="" checked>
+                        <label for="radiobtn1" class="form-check-label">Button 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup1" id="radiobtn2" class="form-check-input" value="">
+                        <label for="radiobtn2" class="form-check-label">Button 2</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup1" id="radiobtn3" class="form-check-input" value="">
+                        <label for="radiobtn3" class="form-check-label">Button 2</label>
+                    </div>
+                </div>
+
+                <select name="select3" id="select3" class="form-select m-0 mb-2 p-2">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3" selected>Three</option>
+                </select>
+
+                <div class="form-check mb-2 align-items-center">
+                    <input type="checkbox" name="input6" id="input6" class="form-check-input" value="off">
+                    <label for="input6" class="text-light form-check-label">Checkbox</label>
+                </div>
+                <div class="form-check mb-2 align-items-center">
+                    <input type="checkbox" name="input7" id="input7" class="form-check-input" value="off">
+                    <label for="input7" class="text-light form-check-label">Checkbox</label>
+                </div>
+
+                <div id="radioGroup2" class="text-light m-0 p-0 mb-1 radio-section">
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup2" id="radiobtn4" class="form-check-input" value="" checked>
+                        <label for="radiobtn4" class="form-check-label">Button 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup2" id="radiobtn5" class="form-check-input" value="">
+                        <label for="radiobtn5" class="form-check-label">Button 2</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="radioGroup2" id="radiobtn" class="form-check-input" value="">
+                        <label for="radiobtn" class="form-check-label">Button 2</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Save -->
+            <div class="row col-2 m-0 p-0 position-fixed end-0 bottom-0 m-3">
+                <button id="save_button" class="btn btn-primary fw-bold" type="submit" disabled>No changes to
+                    save</button>
+            </div>
+        </div>
+
+    </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+
+        const inputFields = document.getElementsByTagName("input");
+        const selectFields = document.getElementsByTagName("select");
+        const radioSections = document.getElementsByClassName("radio-section");
+        const labels = document.getElementsByTagName("label");
+        const initialValuesCol1 = [];
+        const initialValuesCol2 = [];
+        var editHistory = [];
+
+        // Save initial values
+        for (let i = 0; i < inputFields.length; i++) {
+            if (inputFields.item(i).type == "checkbox" || inputFields.item(i).type == "radio") {
+                inputFields.item(i).addEventListener("click", (event) => checkIfModified(event));
+                initialValuesCol2.push(inputFields.item(i).checked);
+            }
+            else if (inputFields.item(i).type == "date") {
+                inputFields.item(i).addEventListener("change", (event) => checkIfModified(event));
+                inputFields.item(i).addEventListener("keyup", (event) => checkIfModified(event));
+                initialValuesCol2.push(inputFields.item(i).value);
+            }
+            else {
+                inputFields.item(i).addEventListener("keyup", (event) => checkIfModified(event));
+                initialValuesCol2.push(inputFields.item(i).value);
+            }
+            initialValuesCol1.push(inputFields.item(i).id);
+        }
+        for (let i = 0; i < selectFields.length; i++) {
+            selectFields.item(i).addEventListener("change", (event) => checkIfModified(event));
+            initialValuesCol1.push(selectFields.item(i).id);
+            initialValuesCol2.push(selectFields.item(i).value);
+        }
+
+        // Display initial values
+        for (let i = 0; i < initialValuesCol1.length; i++) {
+            console.log(initialValuesCol1[i] + ", " + initialValuesCol2[i]);
+        }
+
+        // Listener function
+        function checkIfModified(event) {
+            // console.log(event.target.id);
+            // console.log(event.target.type);
+            // console.log(event.target);
+
+            // Have to ignore Tab keyups for some weird situations
+            if (event.code != "Tab") {
+
+                // Checkboxes are weird
+                if (event.target.type == "checkbox") {
+
+                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                        && !editHistory.includes(event.target.id)) {
+                        editHistory.push(event.target.id);
+                        event.target.classList.add("edited");
+                    }
+                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                        && editHistory.includes(event.target.id)) {
+                        // Do nothing
+                    }
+                    else {
+                        editHistory.splice(editHistory.indexOf(event.target.id), 1);
+                        event.target.classList.remove("edited");
+                    }
+
+                }
+                // Radios are even weirder
+                else if (event.target.type == "radio") {
+
+                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                        && !editHistory.includes(event.target.name)) {
+                        editHistory.push(event.target.name);
+                        document.getElementById(event.target.name).classList.add("edited");
+                    }
+                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                        && editHistory.includes(event.target.name)) {
+                        // Do nothing
+                    }
+                    else {
+                        editHistory.splice(editHistory.indexOf(event.target.id), 1);
+                        document.getElementById(event.target.name).classList.remove("edited");
+                    }
+
+                }
+                // Other elements are fine
+                else {
+
+                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value
+                        && !editHistory.includes(event.target.id)) {
+                        editHistory.push(event.target.id);
+                        event.target.classList.add("edited");
+                    }
+                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value && editHistory.includes(event.target.id)) {
+
+                    }
+                    else {
+                        editHistory.splice(editHistory.indexOf(event.target.id), 1);
+                        event.target.classList.remove("edited");
+                    }
+
+                }
+                checkEditHistory();
+            }
+        }
+
+        // Check if any edits are remaining
+        function checkEditHistory() {
+            console.log(editHistory);
+            if (editHistory.length == 0) {
+                document.getElementById("save_button").disabled = true;
+                document.getElementById("save_button").innerHTML = "No changes to save";
+            }
+            else {
+                document.getElementById("save_button").disabled = false;
+                document.getElementById("save_button").innerHTML = "Save changes";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
