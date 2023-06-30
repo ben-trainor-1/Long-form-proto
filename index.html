@@ -817,7 +817,7 @@
                         <!-- Street address -->
                         <div class="col-8 m-0 mb-3 p-0 pe-1">
                             <label for="input_customerAlternateStreetAddress" class="form-check-label fw-bold m-0 p-0">customerAlternateStreetAddress</label>
-                            <input id="input_customerAlternateStreetAddress" class="form-control px-2 py-1" type="text" disabled>
+                            <input id="input_customerAlternateStreetAddress" class="form-control px-2 py-1" type="text" disabled value="123 Milky Way St.">
                         </div>
                         <!-- City -->
                         <div class="col-4 m-0 mb-3 p-0 ps-1">
@@ -1102,7 +1102,7 @@
                     <!-- Reference name -->
                     <div class="col-8 m-0 mb-3 p-0 pe-1">
                         <label for="input_referenceSecondaryName" class="form-check-label fw-bold m-0 p-0">referenceSecondaryName</label>
-                        <input id="input_referenceSecondaryName" class="form-control px-2 py-1" type="text">
+                        <input id="input_referenceSecondaryName" class="form-control px-2 py-1" type="text" value="jimbob">
                     </div>
                     <!-- Relation -->
                     <div class="col-4 m-0 mb-3 p-0 ps-1">
@@ -2020,32 +2020,29 @@
         const taxIds = [];
         let currentInput = calculationSectionInputs.next();
         while (currentInput.value != undefined) {
-            // console.log(currentInput.value.id.toString());
-            if (currentInput.value.id.toLowerCase().includes("pricingmanual") || currentInput.value.id.toLowerCase().includes("taxexempt")) {
-                // Don't add the two check boxes
-            }
-            else if (currentInput.value.id.toLowerCase().includes("tax") && currentInput.value.id.toLowerCase().includes("rate")) {
+            if (currentInput.value.id.toLowerCase().includes("tax") && currentInput.value.id.toLowerCase().includes("rate")) {
                 taxIds.push(currentInput.value.id);
             }
-            else {
+            else if (currentInput.value.type != "checkbox") {
                 priceIds.push(currentInput.value.id);
             }
             currentInput = calculationSectionInputs.next();
         }
 
-        addValidation();
-        // Made it a function in case of a need to re-validate the whole page
-        // E.g., required fields are hidden/disabled
-        // TODO: the above, re-add validation fields when things are disabled/hidden
-        function addValidation() {
+        addValidation(allInputs);
 
-            for (let i = 0; i < allInputs.length; i++) {
+        // Made it a function in case of a need to re-validate the whole page
+        // Must be passed a querySelectorAll() set of inputs to check
+        // TODO: remove/add validation fields when things are disabled/hidden
+        function addValidation(querySelect) {
+
+            for (let i = 0; i < querySelect.length; i++) {
         
                 // Email fields (id must contain "email")
-                if (allInputs.item(i).id.toLowerCase().includes("email")) {
+                if (querySelect.item(i).id.toLowerCase().includes("email")) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter an email',
@@ -2058,17 +2055,17 @@
                     }
                     // If field is not required
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {rule: 'email', errorMessage: 'Incorrect format',},
                         ]);
                     }
                 }
 
                 // Social security number fields (id must contain "SSN")
-                else if (allInputs.item(i).id.toLowerCase().includes("ssn")) {
+                else if (querySelect.item(i).id.toLowerCase().includes("ssn")) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a SSN',
@@ -2082,7 +2079,7 @@
                     }
                     // If field is not required
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp', 
                                 value: /^[0-9]{4}$/,
@@ -2093,10 +2090,10 @@
                 }
 
                 // Phone number fields (id must contain "phone")
-                else if (allInputs.item(i).type == "tel") {
+                else if (querySelect.item(i).type == "tel") {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a phone number',
@@ -2110,7 +2107,7 @@
                     }
                     // If field is not required
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp', 
                                 value: /^[/(][0-9]{3}[/)][ ][0-9]{3}[-][0-9]{4}$/,
@@ -2121,9 +2118,9 @@
                 }
 
                 // Prevent select fields from having "None" selected only if required
-                else if (allInputs.item(i).tagName == "SELECT" && allInputs.item(i).required) {
-                    // console.log("Adding select " + allInputs.item(i).id + " to validator");
-                    validator.addField('#' + allInputs.item(i).id, [
+                else if (querySelect.item(i).tagName == "SELECT" && querySelect.item(i).required) {
+                    // console.log("Adding select " + querySelect.item(i).id + " to validator");
+                    validator.addField('#' + querySelect.item(i).id, [
                         {
                             rule: 'minNumber',
                             value: 0,
@@ -2133,8 +2130,8 @@
                 }
 
                 // Date fields (already formatted by date input type)
-                else if (allInputs.item(i).type == "date" && allInputs.item(i).required) {
-                    validator.addField('#' + allInputs.item(i).id, [
+                else if (querySelect.item(i).type == "date" && querySelect.item(i).required) {
+                    validator.addField('#' + querySelect.item(i).id, [
                         {
                             rule: 'required', 
                             errorMessage: 'Please enter a date',
@@ -2143,10 +2140,10 @@
                 }
 
                 // State abbreviations
-                else if (allInputs.item(i).id.toLowerCase().includes("state")) {
+                else if (querySelect.item(i).id.toLowerCase().includes("state")) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a state',
@@ -2165,7 +2162,7 @@
                     }
                     // If field is not required, only check the format
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp',
                                 value: /^(A[KLRZ])|(C[AOT])|(D[CE])|(FL)|(GA)|(HI)|(I[ADLN])|(K[SY])|(LA)|(M[ADEINOST])|(N[CDEHJMVY])|(O[HKR])|(P[AR])|(RI)|(S[CD])|(T[NX])|(UT)|(V[AIT])|(W[AIVY])$/,
@@ -2181,10 +2178,10 @@
                 }
 
                 // Zip codes
-                else if (allInputs.item(i).id.toLowerCase().includes("zip")) {
+                else if (querySelect.item(i).id.toLowerCase().includes("zip")) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a zip code',
@@ -2198,7 +2195,7 @@
                     }
                     // If field is not required, only check the format
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp',
                                 value: /^([0-9]{5})([-][0-9]{4})?$/,
@@ -2210,10 +2207,10 @@
 
                 // Tax inputs in calculations table
                 // I wrote this regular expression https://regex101.com/r/9BLNOW/1
-                else if (taxIds.includes(allInputs.item(i).id)) {
+                else if (taxIds.includes(querySelect.item(i).id)) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a tax rate',
@@ -2227,7 +2224,7 @@
                     }
                     // If field is not required, only check the format
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp',
                                 value: /(^[0]?[.]{1}[0-9]{0,10}[1-9]{1}$)|(^[1-9]{1}[0-9]{0,2}([.]{1}[0-9]{0,10}[1-9]{1})?$)/g,
@@ -2238,10 +2235,10 @@
                 }
 
                 // Tax inputs in calculations table
-                else if (priceIds.includes(allInputs.item(i).id)) {
+                else if (priceIds.includes(querySelect.item(i).id)) {
                     // If field is required
-                    if (allInputs.item(i).required) {
-                        validator.addField('#' + allInputs.item(i).id, [
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'required', 
                                 errorMessage: 'Please enter a dollar amount',
@@ -2255,7 +2252,7 @@
                     }
                     // If field is not required, only check the format
                     else {
-                        validator.addField('#' + allInputs.item(i).id, [
+                        validator.addField('#' + querySelect.item(i).id, [
                             {
                                 rule: 'customRegexp',
                                 value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
@@ -2267,8 +2264,8 @@
 
                 // All other required fields that don't need other forms of validation
                 // (otherwise they won't get seen by the validator)
-                else if (allInputs.item(i).required) {
-                    validator.addField('#' + allInputs.item(i).id, [
+                else if (querySelect.item(i).required) {
+                    validator.addField('#' + querySelect.item(i).id, [
                         {rule: 'required', errorMessage: 'Please enter a value',},
                     ]);
                 }
@@ -2278,6 +2275,18 @@
             addAutoValidateListener();
             
         }
+
+
+        // For removing validation from a set of fields
+        // Must be passed a querySelectAll() set of inputs
+        function removeValidation(querySelect) {
+            for (let i = 0; i < querySelect.length; i++) {
+                if (validator.fieldIds.has("#" + querySelect.item(i).id)) {
+                    validator.removeField("#" + querySelect.item(i).id);
+                }
+            }
+        }
+        
 
         // Add automatic validation listening
         function addAutoValidateListener() {
@@ -2289,9 +2298,7 @@
         
         // Auto validate input
         function autoValidateListener(event) {
-            console.log(event.key);
-            if (event.key != "Tab")
-            validator.revalidateField("#" + this.id);
+            if (event.key != "Tab") validator.revalidateField("#" + this.id);
         }
 
 
@@ -2332,6 +2339,7 @@
             validator.revalidateField("#" + this.id.toString());
         }
         $('*[id*=SSN]').keyup(ssnMask);
+
 
         // Dropdown menu
         document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseover", showDropdown);
@@ -2590,11 +2598,31 @@
         }
 
 
-        // Show/hide sections
+        // SHOW/HIDE SECTIONS
         const hiddenSections = document.getElementsByClassName("hidden-section");
-        for (var i = 0; i < hiddenSections.length; i++) {
+        for (let i = 0; i < hiddenSections.length; i++) {
             hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
         }
+        showHideAllSections();
+
+        // Dynamically show/hide sections that have values in them on page load/refresh
+        function showHideAllSections() {
+            for (let i = 0; i < hiddenSections.length; i++) {                
+                let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
+                let currentField = currentValues.next();
+                while (currentField.value != undefined) {
+                    if (currentField.value.value != '' && currentField.value.type != "checkbox") {
+                        hiddenSections.item(i).click();
+                        break;
+                    }
+                    else {
+                        currentField = currentValues.next();
+                    }
+                }
+            }
+        }
+        
+        // Show/hide sections of corresponding container to a checkbox
         function showHideSectionsClick() {
 
             // Show/hide corresponding sections
@@ -2621,17 +2649,12 @@
                 if (this.checked) {
                     for (let i = 0; i < requiredFields.length; i++) {
                         requiredFields.item(i).required = true;
-                        validator.addField('#' + requiredFields.item(i).id, [
-                            {rule: 'required',},
-                            {rule: 'minLength', value: 2,},
-                        ]);
                     }
                 }
                 // When container is closed, remove requirement for all corresponding fields
                 else {
                     for (let i = 0; i < requiredFields.length; i++) {
                         requiredFields.item(i).required = false;
-                        validator.removeField('#' + requiredFields.item(i).id);
                     }
                 }
             }
@@ -2641,10 +2664,11 @@
             let fields = fieldsContainer.getElementsByTagName("input");
             // Check if there are any fields to track changes of
             if (fields.item(0) != null) {
-                // When section is shown
+                // When section is shown add fields to edit history tracking
+                // and fields to validator
                 if (this.checked) {
-                    for (let i = 0; i < fields.length; i++) {
-
+                    addValidation(fieldsContainer.querySelectorAll("input"));
+                    for (let i = 0; i < fields.length; i++) {                        
                         if (fields.item(i).type != "checkbox") {
                             if (fields.item(i).disabled) {
                                 fields.item(i).disabled = false;
@@ -2659,7 +2683,10 @@
                     }
                 }
                 // When section is hidden, remove inputs in this section from the edit history
+                // and remove validation fields from validator
                 else {
+                    removeValidation(fieldsContainer.querySelectorAll("input"));
+
                     for (let i = 0; i < fields.length; i++) {
                         if (editHistory.includes(fields.item(i).id)) {
                             editHistory.splice(editHistory.indexOf(fields.item(i).id), 1);
@@ -2759,7 +2786,7 @@
 
         // Check if any edits are remaining
         function checkEditHistory() {
-            console.log(editHistory);
+            // console.log(editHistory);
             if (editHistory.length == 0) {
                 document.getElementById("save_button").disabled = true;
                 document.getElementById("save_button").innerHTML = "No changes";
