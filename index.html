@@ -1335,7 +1335,7 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input required id="input_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
                                 <td id="auto_input_cash_options" class="fst-italic border-start text-center fs-7">[Manual]</td>
@@ -2014,6 +2014,25 @@
         const validator = new JustValidate('#building_form');
         const allInputs = document.querySelectorAll("input, select, textarea");
 
+        // Need to make lists of IDs to check against when adding validation
+        const calculationSectionInputs = document.querySelectorAll("#calculations input").values();
+        const priceIds = [];
+        const taxIds = [];
+        let currentInput = calculationSectionInputs.next();
+        while (currentInput.value != undefined) {
+            // console.log(currentInput.value.id.toString());
+            if (currentInput.value.id.toLowerCase().includes("pricingmanual") || currentInput.value.id.toLowerCase().includes("taxexempt")) {
+                // Don't add the two check boxes
+            }
+            else if (currentInput.value.id.toLowerCase().includes("tax")) {
+                taxIds.push(currentInput.value.id);
+            }
+            else {
+                priceIds.push(currentInput.value.id);
+            }
+            currentInput = calculationSectionInputs.next();
+        }
+
         addValidation();
         // Made it a function in case of a need to re-validate the whole page
         // E.g., required fields are hidden/disabled
@@ -2189,6 +2208,62 @@
                     }
                 }
 
+                // Tax inputs in calculations table
+                else if (taxIds.includes(allInputs.item(i).id)) {
+                    // If field is required
+                    if (allInputs.item(i).required) {
+                        validator.addField('#' + allInputs.item(i).id, [
+                            {
+                                rule: 'required', 
+                                errorMessage: 'Please enter a tax rate',
+                            },
+                            {
+                                rule: 'customRegexp',
+                                value: /^[0-9]{1,}([.][0-9]{1,})?$/,
+                                errorMessage: 'Enter a valid tax rate',
+                            },
+                        ]);
+                    }
+                    // If field is not required, only check the format
+                    else {
+                        validator.addField('#' + allInputs.item(i).id, [
+                            {
+                                rule: 'customRegexp',
+                                value: /^[0-9]{1,}([.][0-9]{1,})?$/,
+                                errorMessage: 'Enter a valid tax rate',
+                            },
+                        ]);
+                    }                    
+                }
+
+                // Tax inputs in calculations table
+                else if (priceIds.includes(allInputs.item(i).id)) {
+                    // If field is required
+                    if (allInputs.item(i).required) {
+                        validator.addField('#' + allInputs.item(i).id, [
+                            {
+                                rule: 'required', 
+                                errorMessage: 'Please enter a dollar amount',
+                            },
+                            {
+                                rule: 'customRegexp',
+                                value: /^[0-9]{1,}([.][0-9]{2})?$/,
+                                errorMessage: 'Enter a valid dollar amount',
+                            },
+                        ]);
+                    }
+                    // If field is not required, only check the format
+                    else {
+                        validator.addField('#' + allInputs.item(i).id, [
+                            {
+                                rule: 'customRegexp',
+                                value: /^[0-9]{1,}([.][0-9]{2})?$/,
+                                errorMessage: 'Enter a valid dollar amount',
+                            },
+                        ]);
+                    }
+                }
+
                 // All other required fields that don't need other forms of validation
                 // (otherwise they won't get seen by the validator)
                 else if (allInputs.item(i).required) {
@@ -2203,6 +2278,7 @@
             
         }
 
+        // Add automatic validation listening
         function addAutoValidateListener() {
             const mapIter = validator.fieldIds.keys();
             for (let i = 0; i < validator.fieldIds.size; i++) {
@@ -2211,11 +2287,14 @@
         }
         
         // Auto validate input
-        function autoValidateListener() {
+        function autoValidateListener(event) {
+            console.log(event.key);
+            if (event.key != "Tab")
             validator.revalidateField("#" + this.id);
         }
 
 
+        // AUTOFORMAT STUFF
         // Autoformat phone numbers (Sam edited a codepen)
         function phoneMask() { 
             var num = $(this).val().replace(/\D/g,''); 
@@ -2252,7 +2331,6 @@
             validator.revalidateField("#" + this.id.toString());
         }
         $('*[id*=SSN]').keyup(ssnMask);
-
 
         // Dropdown menu
         document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseover", showDropdown);
