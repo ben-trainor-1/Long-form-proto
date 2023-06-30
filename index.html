@@ -1091,7 +1091,7 @@
                 <!-- Secondary reference option -->
                 <div class="row m-0 p-2 px-3 bg-dark text-light rounded">
                     <div class="form-check">
-                        <input id="input_secondaryReference" type="checkbox" class="form-check-input hidden-section ignore-field">
+                        <input id="input_secondaryReference" type="checkbox" class="form-check-input hidden-section">
                         <label for="input_secondaryReference" class="form-check-label">secondaryReference</label>
                     </div>
                 </div>
@@ -1335,7 +1335,7 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input required id="input_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="input_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
                                 <td id="auto_input_cash_options" class="fst-italic border-start text-center fs-7">[Manual]</td>
@@ -2287,7 +2287,6 @@
             }
         }
         
-
         // Add automatic validation listening
         function addAutoValidateListener() {
             const mapIter = validator.fieldIds.keys();
@@ -2567,6 +2566,32 @@
         }
 
 
+        // SHOW/HIDE SECTIONS
+        const hiddenSections = document.getElementsByClassName("hidden-section");
+        for (let i = 0; i < hiddenSections.length; i++) {
+            hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
+        }
+        showHideAllSections();
+
+        // Dynamically show/hide sections that have values in them on page load/refresh
+        function showHideAllSections() {
+            for (let i = 0; i < hiddenSections.length; i++) {                
+                let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
+                let currentField = currentValues.next();
+                while (currentField.value != undefined) {
+                    if (currentField.value.value != '' && currentField.value.type != "checkbox") {
+                        hiddenSections.item(i).checked = true;
+                        document.getElementById("container_" + hiddenSections.item(i).id).classList.remove("visually-hidden");
+                        break;
+                    }
+                    else {
+                        currentField = currentValues.next();
+                    }
+                }
+            }
+        }
+
+
         // CHANGE TRACKING
         const initialValuesCol1 = [];
         const initialValuesCol2 = [];
@@ -2595,31 +2620,6 @@
                 initialValuesCol1.push(allInputs.item(i).id);
             }
 
-        }
-
-
-        // SHOW/HIDE SECTIONS
-        const hiddenSections = document.getElementsByClassName("hidden-section");
-        for (let i = 0; i < hiddenSections.length; i++) {
-            hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
-        }
-        showHideAllSections();
-
-        // Dynamically show/hide sections that have values in them on page load/refresh
-        function showHideAllSections() {
-            for (let i = 0; i < hiddenSections.length; i++) {                
-                let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
-                let currentField = currentValues.next();
-                while (currentField.value != undefined) {
-                    if (currentField.value.value != '' && currentField.value.type != "checkbox") {
-                        hiddenSections.item(i).click();
-                        break;
-                    }
-                    else {
-                        currentField = currentValues.next();
-                    }
-                }
-            }
         }
         
         // Show/hide sections of corresponding container to a checkbox
