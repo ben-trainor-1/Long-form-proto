@@ -2024,7 +2024,6 @@
 
         // Made it a function in case of a need to re-validate the whole page
         // Must be passed a querySelectorAll() set of inputs to check
-        // TODO: remove/add validation from calculations table fields
         function addValidation(querySelect) {
 
             for (let i = 0; i < querySelect.length; i++) {
@@ -2843,10 +2842,6 @@
                 document.getElementById("save_button").click();
             }
         });
-
-
-        // TODO: Make sure to clear data from hidden input fields like references and customers when submitting
-        // I.e., clear the secondary references and customers if there are none
 
         
     </script>
