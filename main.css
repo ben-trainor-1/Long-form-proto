@@ -136,7 +136,7 @@ input.edited:disabled {
 
 label:has(+ select), label:has(+ input), label:has(+ textarea),
 label:has(+ .form-check) {
-    transition: .1s;
+    transition: .2s;
     font-size: .9rem;
 }
 

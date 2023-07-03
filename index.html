@@ -86,7 +86,7 @@
         
     
     
-    <form id="building_form" action="" class="row col-12 m-0 p-0">
+    <form id="building_form" action="index.html" class="row col-12 m-0 p-0">
         
         <div id="building_form_dropdowns" class="row m-0 p-0 py-2 px-lg-0 px-2 bg-insight-primary position-sticky sticky-top shadow">
 
@@ -276,16 +276,16 @@
                 <div id="container_transactionType" class="col-md-4 col-6 m-0 p-2 text-start radio-section">
                     <label class="fw-bold m-0 p-0">Transaction type</label>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="input_cash" type="radio" class="form-check-input radio_transactionType" checked>
-                        <label for="input_cash" class="form-check-label">Cash</label>
+                        <input required name="container_transactionType" id="rdo_cash" type="radio" class="form-check-input radio_transactionType" checked>
+                        <label for="rdo_cash" class="form-check-label">Cash</label>
                     </div>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="input_rto" type="radio" class="form-check-input radio_transactionType">
-                        <label for="input_rto" class="form-check-label">RTO</label>
+                        <input required name="container_transactionType" id="rdo_rto" type="radio" class="form-check-input radio_transactionType">
+                        <label for="rdo_rto" class="form-check-label">RTO</label>
                     </div>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="input_stock" type="radio" class="form-check-input radio_transactionType">
-                        <label for="input_stock" class="form-check-label">Stock</label>
+                        <input required name="container_transactionType" id="rdo_stock" type="radio" class="form-check-input radio_transactionType">
+                        <label for="rdo_stock" class="form-check-label">Stock</label>
                     </div>
                 </div>
 
@@ -343,8 +343,8 @@
                     <!-- Manufacturer and dealer name -->
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
-                            <label for="input_manufacturer" class="row fw-bold m-0 p-0">Manufacturer</label>
-                            <select required id="input_manufacturer" class="form-select m-0 p-0 px-2 py-1">
+                            <label for="ddl_manufacturer" class="row fw-bold m-0 p-0">Manufacturer</label>
+                            <select required id="ddl_manufacturer" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -352,8 +352,8 @@
                             </select>
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
-                            <label for="input_dealerName" class="row fw-bold m-0 p-0">Dealer name</label>
-                            <select required id="input_dealerName" class="form-select m-0 p-0 px-2 py-1">
+                            <label for="ddl_dealerName" class="row fw-bold m-0 p-0">Dealer name</label>
+                            <select required id="ddl_dealerName" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -364,8 +364,8 @@
                     <!-- Lot and sales person -->
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
-                            <label for="input_lot" class="row fw-bold m-0 p-0">Lot</label>
-                            <select required id="input_lot" class="form-select m-0 p-0 px-2 py-1">
+                            <label for="ddl_lot" class="row fw-bold m-0 p-0">Lot</label>
+                            <select required id="ddl_lot" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -373,8 +373,8 @@
                             </select>
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
-                            <label for="input_salesPerson" class="row fw-bold m-0 p-0">Sales person</label>
-                            <select required id="input_salesPerson" class="form-select m-0 p-0 px-2 py-1">
+                            <label for="ddl_salesPerson" class="row fw-bold m-0 p-0">Sales person</label>
+                            <select required id="ddl_salesPerson" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -389,8 +389,8 @@
                     <!-- Shed details -->
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
-                            <label for="input_shedType" class="row fw-bold m-0 p-0">shedType</label>
-                            <select id="input_shedType" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_shedType" class="row fw-bold m-0 p-0">shedType</label>
+                            <select id="ddl_shedType" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -398,8 +398,8 @@
                             </select>
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
-                            <label for="input_roofType" class="row fw-bold m-0 p-0">roofType</label>
-                            <select id="input_roofType" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_roofType" class="row fw-bold m-0 p-0">roofType</label>
+                            <select id="ddl_roofType" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -409,8 +409,8 @@
                     </div>
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
-                            <label for="input_size" class="row fw-bold m-0 p-0">size</label>
-                            <select id="input_size" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_size" class="row fw-bold m-0 p-0">size</label>
+                            <select id="ddl_size" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -418,8 +418,8 @@
                             </select>
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
-                            <label for="input_customSize" class="row fw-bold m-0 p-0">customSize</label>
-                            <input id="input_customSize" type="text" class="form-control m-0 px-2 py-1" disabled>
+                            <label for="txt_customSize" class="row fw-bold m-0 p-0">customSize</label>
+                            <input id="txt_customSize" type="text" class="form-control m-0 px-2 py-1" disabled>
                         </div>
                     </div>
 
@@ -431,8 +431,8 @@
 
                         <!-- Siding, roof, trim -->
                         <div class="col-lg-4 col-6 m-0 p-0 pe-3">
-                            <label for="input_sidingColor" class="row fw-bold m-0 p-0">sidingColor</label>
-                            <select id="input_sidingColor" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_sidingColor" class="row fw-bold m-0 p-0">sidingColor</label>
+                            <select id="ddl_sidingColor" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -442,8 +442,8 @@
 
                         
                         <div class="col-lg-4 col-6 m-0 p-0 px-lg-3 ps-3">
-                            <label for="input_roofColor" class="row fw-bold m-0 p-0">roofColor</label>
-                            <select id="input_roofColor" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_roofColor" class="row fw-bold m-0 p-0">roofColor</label>
+                            <select id="ddl_roofColor" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -454,8 +454,8 @@
                         <div class="row m-0 mb-lg-0 mb-3 p-0 d-lg-none d-flex"></div>
                         
                         <div class="col-lg-4 col-6 m-0 p-0 ps-lg-3 pe-3">
-                            <label for="input_trimColor" class="row fw-bold m-0 p-0">trimColor</label>
-                            <select id="input_trimColor" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_trimColor" class="row fw-bold m-0 p-0">trimColor</label>
+                            <select id="ddl_trimColor" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -467,8 +467,8 @@
 
                         <!-- Door and door trim -->
                         <div class="col-lg-4 col-6 m-0 p-0 pe-lg-3 ps-3">
-                            <label for="input_doorColor" class="row fw-bold m-0 p-0">doorColor</label>
-                            <select id="input_doorColor" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_doorColor" class="row fw-bold m-0 p-0">doorColor</label>
+                            <select id="ddl_doorColor" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -479,8 +479,8 @@
                         <div class="row m-0 mb-lg-0 mb-3 p-0 d-lg-none d-flex"></div>
                         
                         <div class="col-lg-4 col-6 m-0 p-0 ps-3">
-                            <label for="input_doorTrimColor" class="row fw-bold m-0 p-0">doorTrimColor</label>
-                            <select id="input_doorTrimColor" class="form-select m-0 px-2 py-1">
+                            <label for="ddl_doorTrimColor" class="row fw-bold m-0 p-0">doorTrimColor</label>
+                            <select id="ddl_doorTrimColor" class="form-select m-0 px-2 py-1">
                                 <option value="-1" selected disabled>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -585,8 +585,8 @@
 
                     <!-- Option dropdown -->
                     <div class="row m-0 mb-3 p-0">
-                        <label for="input_option" class="fw-bold m-0 p-0">option</label>
-                        <select id="input_option" class="form-select m-0 px-2 py-1 ignore-field">
+                        <label for="ddl_option" class="fw-bold m-0 p-0">option</label>
+                        <select id="ddl_option" class="form-select m-0 px-2 py-1 ignore-field">
                             <option value="-1" disabled selected>None</option>
                             <option value="1"></option>
                             <option value="2"></option>
@@ -650,8 +650,8 @@
             <div class="row col-xl-6 col-lg-8 col-sm-10 m-0 mb-3 bg-white p-3 rounded border">
 
                 <div class="row m-0 p-0 mb-3 justify-content-center">
-                    <label for="input_referral" class="row fw-bold m-0 p-0">referral</label>
-                    <select id="input_referral" class="form-select m-0 px-2 py-1" required>
+                    <label for="ddl_referral" class="row fw-bold m-0 p-0">referral</label>
+                    <select id="ddl_referral" class="form-select m-0 px-2 py-1" required>
                         <option value="-1" disabled selected>None</option>
                         <option value="1"></option>
                         <option value="2"></option>
@@ -1146,8 +1146,8 @@
                 <!-- Same as customer -->
                 <div class="row m-0 mb-3 p-2 px-3 bg-dark text-light rounded">
                     <div class="form-check">
-                        <input id="input_locationSameAsCustomer" type="checkbox" class="form-check-input">
-                        <label for="input_locationSameAsCustomer" class="form-check-label">locationSameAsCustomer</label>
+                        <input id="cbx_locationSameAsCustomer" type="checkbox" class="form-check-input">
+                        <label for="cbx_locationSameAsCustomer" class="form-check-label">locationSameAsCustomer</label>
                     </div>
                 </div>
 
@@ -1274,8 +1274,8 @@
                         <!-- Manual pricing -->
                         <div class="row col-4 m-0 p-0">
                             <div class="form-check">
-                                <input id="input_pricingManual" type="checkbox" class="form-check-input">
-                                <label for="input_pricingManual" class="form-check-label">pricingManual</label>
+                                <input id="cbx_pricingManual" type="checkbox" class="form-check-input">
+                                <label for="cbx_pricingManual" class="form-check-label">pricingManual</label>
                             </div>
                         </div>
                         <div id="taxExempt" class="row col-4 m-0 p-0">
@@ -1309,10 +1309,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_cash_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_cash_basePrice" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_cash_basePrice" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Options -->
                             <tr>
@@ -1322,10 +1322,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_cash_options" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_cash_options" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_cash_options" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Discount -->
                             <tr class="border-bottom border-dark">
@@ -1335,10 +1335,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_discount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_cash_discount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_cash_discount" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_cash_discount" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Subtotal -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -1363,10 +1363,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_salesTaxRate" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_cash_salesTaxRate" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_cash_salesTaxRate" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_cash_salesTaxRate" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Sales tax amount -->
                             <tr class="border-bottom border-dark">
@@ -1404,10 +1404,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_cash_fees" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_cash_fees" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_cash_fees" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_cash_fees" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Total cost -->
                             <tr class="table-dark">
@@ -1447,7 +1447,7 @@
                                 <td class="text-center border-end">#</td>
                                 <td class="text-end border-end">Contract term (months)</td>
                                 <td class="text-start">
-                                    <select name="input_contractTerm" id="input_contractTerm" class="form-select m-0 p-0 px-2 py-1">
+                                    <select name="ddl_contractTerm" id="ddl_contractTerm" class="form-select m-0 p-0 px-2 py-1">
                                         <option value="-1" disabled selected>None</option>
                                         <option value="1"></option>
                                         <option value="2"></option>
@@ -1461,7 +1461,7 @@
                                 <td class="text-center border-end">#</td>
                                 <td class="text-end border-end">Payment due date</td>
                                 <td class="text-start">
-                                    <select name="input_paymentDueDate" id="input_paymentDueDate" class="form-select m-0 p-0 px-2 py-1">
+                                    <select name="ddl_paymentDueDate" id="ddl_paymentDueDate" class="form-select m-0 p-0 px-2 py-1">
                                         <option value="-1" disabled selected>None</option>
                                         <option value="1"></option>
                                         <option value="2"></option>
@@ -1493,10 +1493,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_basePrice" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_basePrice" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Total options -->
                             <tr class="border-bottom border-dark ">
@@ -1506,10 +1506,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_totalOptions" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_totalOptions" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_totalOptions" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_totalOptions" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Retail price -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -1534,10 +1534,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_discount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_discount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_discount" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_discount" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Sale price -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -1562,7 +1562,7 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_costReduction" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_costReduction" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr>
                                 </table>
                                 <div class="row col-12 m-0 px-2 pt-1 pb-0">
@@ -1571,7 +1571,7 @@
                                         <label for="input_overrideReductionLimit" class="form-check-label">Override limit</label>
                                     </div>
                                 </div>
-                                <td id="auto_input_rto_costReduction" class="fst-italic border-start text-center fs-7 align-middle">[Automatic]</td>
+                                <td id="auto_rdo_rto_costReduction" class="fst-italic border-start text-center fs-7 align-middle">[Automatic]</td>
                             </tr>
                             <!-- RTO amount -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -1596,10 +1596,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_lossDamageWaiver" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_lossDamageWaiver" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_lossDamageWaiver" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_lossDamageWaiver" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Base payment amount -->
                             <tr>
@@ -1609,10 +1609,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_basePayment" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_basePayment" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_basePayment" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_basePayment" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Sales tax rate -->
                             <tr>
@@ -1622,10 +1622,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_salesTaxRate" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_salesTaxRate" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_salesTaxRate" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_salesTaxRate" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Monthly sales tax -->
                             <tr class="border-bottom border-dark">
@@ -1635,10 +1635,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_monthlySalesTax" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_monthlySalesTax" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_monthlySalesTax" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_monthlySalesTax" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Total monthly payment -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -1663,10 +1663,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_rto_securityDeposit" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_rto_securityDeposit" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_rto_securityDeposit" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_rto_securityDeposit" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Total initial payment -->
                             <tr class="table-dark">
@@ -1708,10 +1708,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_stock_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
+                                        <td class="w-100"><input id="rdo_stock_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_stock_basePrice" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_stock_basePrice" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Total options -->
                             <tr>
@@ -1721,10 +1721,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td td class="w-100"><input id="input_stock_totalOptions" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" value="1000.00" disabled></td>
+                                        <td td class="w-100"><input id="rdo_stock_totalOptions" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end" value="1000.00" disabled></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_stock_totalOptions" class="fst-italic border-start text-center fs-7">[Automatic]</td>
+                                <td id="auto_rdo_stock_totalOptions" class="fst-italic border-start text-center fs-7">[Automatic]</td>
                             </tr>
                             <!-- Discount -->
                             <tr class="border-bottom border-dark">
@@ -1734,10 +1734,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_stock_discount" type="text" class="form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="rdo_stock_discount" type="text" class="form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_stock_discount" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_rdo_stock_discount" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Subtotal -->
                             <tr class="border-bottom border-dark table-dark">
@@ -1849,8 +1849,8 @@
                         <input type="date" name="input_transactionDate" id="input_transactionDate" class="form-control px-2 py-1 ignore-field">
                     </div>
                     <div class="row col-4 m-0 p-0 px-1">
-                        <label for="input_paymentType" class="form-label fw-bold m-0 p-0">Payment type</label>
-                        <select name="input_paymentType" id="input_paymentType" class="form-select px-2 py-1 ignore-field">
+                        <label for="ddl_paymentType" class="form-label fw-bold m-0 p-0">Payment type</label>
+                        <select name="ddl_paymentType" id="ddl_paymentType" class="form-select px-2 py-1 ignore-field">
                             <option value="-1" disabled selected>None</option>
                             <option value="1"></option>
                             <option value="2"></option>
@@ -2001,6 +2001,7 @@
         const validator = new JustValidate('#building_form');
         // For some reason, you have to tell the validator to actually submit the form when it's successfully validated
         validator.onSuccess(event => {
+            console.log("Submitting form");
             document.getElementById("building_form").submit();
         });
         // Grab every single field on the page
@@ -2316,7 +2317,6 @@
             for (let i = 0; i < validator.fieldIds.size; i++) {
                 currentFieldId = mapIter.next().value;
                 document.querySelector(currentFieldId).addEventListener("keyup", autoValidateListener);
-                console.log("Adding autoValidateListener to " + currentFieldId);
             }
         }
         
@@ -2415,7 +2415,7 @@
 
         // Location same as customer
         // Disables location data entry and auto-updates fields based on customer address while being entered
-        const locationSameAsCustomerCheck = document.getElementById("input_locationSameAsCustomer");
+        const locationSameAsCustomerCheck = document.getElementById("cbx_locationSameAsCustomer");
         locationSameAsCustomerCheck.addEventListener("click", locationSameAsCustomerClick);
         document.getElementById("input_customerSearchAddress").addEventListener("keyup", locationSameAsCustomerClick);
         document.getElementById("input_customerStreetAddress").addEventListener("keyup", locationSameAsCustomerClick);
@@ -2497,7 +2497,7 @@
         function transactionTypeClick() {
             document.getElementById("noTransactionType").classList.add("visually-hidden");
             // CASH
-            if (document.getElementById("input_cash").checked == true) {
+            if (document.getElementById("rdo_cash").checked == true) {
                 if (document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.remove("visually-hidden");
                     addValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
@@ -2524,7 +2524,7 @@
                 }
             }
             // RTO
-            else if (document.getElementById("input_rto").checked == true) {
+            else if (document.getElementById("rdo_rto").checked == true) {
                 if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.add("visually-hidden");
                     removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
@@ -2551,7 +2551,7 @@
                 }
             }
             // STOCK
-            else if (document.getElementById("input_stock").checked == true) {
+            else if (document.getElementById("rdo_stock").checked == true) {
                 if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.add("visually-hidden");
                     removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
@@ -2582,7 +2582,7 @@
 
         // Manual pricing in calculations table
         // Enable/disable fields, update automatic/manual appropriately
-        const manualPricingCheck = document.getElementById("input_pricingManual");
+        const manualPricingCheck = document.getElementById("cbx_pricingManual");
         manualPricingCheck.addEventListener("click", manualPricingClick);
         var manualPrices = document.getElementsByClassName("manual-price-toggle");
         manualPricingClick();
