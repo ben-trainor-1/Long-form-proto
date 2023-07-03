@@ -162,8 +162,10 @@ input:focus:has(+ .just-validate-error-label) {
     /* background-color: rgb(228, 54, 54); */
     color: rgb(235, 55, 55) !important;
 }
+.just-validate-error-field, .just-validate-error-field:focus, .just-validate-error-field:focus-visible,
 .just-validate-error-field, .just-validate-error-field:focus, .just-validate-error-field:focus-visible {
-    border: 1px solid (235, 55, 55);
+    border: 1px solid rgb(235, 55, 55);
+    background-color: rgb(255, 241, 241) !important;
     color: rgb(200, 39, 39);
 }
 
