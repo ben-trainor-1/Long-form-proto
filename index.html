@@ -578,67 +578,54 @@
 
             <!-- OPTIONS -->
             <!-- <div class="col-xxl-2 col-xl-1 m-0 p-0"></div> -->
-            <div class="row m-0 mb-3 p-0 px-2">
+            <div class="row m-0 mb-3 p-0 justify-content-center">
 
                 <!-- Options -->
-                <div class="row m-0 p-0 mb-3 justify-content-center bg-white p-3 rounded border">
+                <div class="row col-xl-6 col-lg-8 col-md-10 m-0 p-0 mb-3 justify-content-center bg-white p-3 rounded border">
 
-                    <!--  -->
-                    <div class="row m-0 p-0">
-
-                        <div class="col-6 m-0 p-0">
-                            <label for="input_options" class="col-xxl-7 col-lg-6 fw-bold m-0 p-0">options</label>
-                            <select id="input_options" class="form-select m-0 px-2 py-1 ignore-field">
-                                <option value="-1" disabled selected>None</option>
-                                <option value="1"></option>
-                                <option value="2"></option>
-                                <option value="3"></option>
-                            </select>
-                        </div>
-                        
-                    </div>
-
-
-                    <!-- Dropdown options -->
+                    <!-- Option dropdown -->
                     <div class="row m-0 mb-3 p-0">
-                        <div class="row m-0 p-0">
-                            <div class="col-2"></div>
-                            <label for="input_optionsQuantity" class="col-1 fw-bold m-0 p-0 px-1">optionsQuantity</label>
-                        </div>
-                        <div class="row m-0 p-0">
-                            <div class="col-xxl-7 col-lg-6 m-0 ps-0 px-1">
-                                
-                            </div>
-                            <div class="col-2 m-0 px-1"></div>
-                            <div class="col-1 m-0 px-1">
-                                <input id="input_optionsQuantity" class="form-control m-0 px-2 py-1 ignore-field" type="number" min="1">
-                            </div>
-                            <div class="row col-xxl-2 col-lg-3 m-0 pe-0 px-1">
-                                <button id="btn_addOption" class="btn btn-primary m-0 p-lg-0 p-2">addOption</button>
-                            </div>
-                        </div>
+                        <label for="input_option" class="fw-bold m-0 p-0">option</label>
+                        <select id="input_option" class="form-select m-0 px-2 py-1 ignore-field">
+                            <option value="-1" disabled selected>None</option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                        </select>
                     </div>
+                    <!-- Quantity -->
+                    <div class="col-6 m-0 mb-4 p-0 pe-1">
+                        <label for="input_optionQuantity" class="fw-bold m-0 p-0">optionQuantity</label>
+                        <input id="input_optionQuantity" class="form-control m-0 px-2 py-1 ignore-field" type="number" min="1">
+                    </div>
+                    <!-- Cost -->
+                    <div class="col-6 m-0 mb-4 p-0 ps-1">
+                        <label for="input_optionCost" class="fw-bold m-0 p-0">optionCost</label>
+                        <input id="input_optionCost" class="form-control m-0 px-2 py-1 ignore-field" type="text" disabled>
+                    </div>
+                    <!-- Add option -->
+                    <div class="row col-5 m-0 mb-3 p-0">
+                        <button id="btn_addOption" class="btn btn-primary m-0">addOption</button>
+                    </div>
+                    
                     <!-- Custom options -->
-                    <div class="row m-0 p-0">
-                        <div class="row m-0 p-0">
-                            <label for="input_customOption" class="col-xxl-7 col-lg-6 fw-bold m-0 p-0">customOption</label>
-                            <label for="input_customCost" class="col-2 fw-bold m-0 p-0 px-1">customCost</label>
-                            <label for="input_customQuantity" class="col-1 fw-bold m-0 p-0 px-1">customQuantity</label>
-                        </div>
-                        <div class="row m-0 p-0">
-                            <div class="col-xxl-7 col-lg-6 m-0 ps-0 px-1">
-                                <input id="input_customOption" class="form-control m-0 px-2 py-1 ignore-field" type="text">
-                            </div>
-                            <div class="col-2 m-0 px-1">
-                                <input id="input_customCost" class="form-control m-0 px-2 py-1 ignore-field" type="text">
-                            </div>
-                            <div class="col-1 m-0 px-1">
-                                <input id="input_customQuantity" class="form-control m-0 px-2 py-1 ignore-field" type="number" min="1">
-                            </div>
-                            <div class="row col-xxl-2 col-lg-3 m-0 pe-0 px-1">
-                                <button id="btn_addCustomOption" class="btn btn-primary m-0 p-lg-0 p-2">addCustomOption</button>
-                            </div>
-                        </div>
+                    <div class="m-0 mb-3 p-0">
+                        <label for="input_customOption" class="fw-bold m-0 p-0">customOption</label>
+                        <input id="input_customOption" class="form-control m-0 px-2 py-1 ignore-field" type="text">
+                    </div>
+                    <!-- Quantity -->
+                    <div class="col-6 m-0 mb-4 p-0 pe-1">
+                        <label for="input_customOptionQuantity" class="fw-bold m-0 p-0 px-1">customOptionQuantity</label>
+                        <input id="input_customOptionQuantity" class="form-control m-0 px-2 py-1 ignore-field" type="number" min="1">
+                    </div>
+                    <!-- Cost -->
+                    <div class="col-6 m-0 mb-4 p-0 ps-1">
+                        <label for="input_customOptionCost" class="fw-bold m-0 p-0 px-1">customOptionCost</label>
+                        <input id="input_customOptionCost" class="form-control m-0 px-2 py-1 ignore-field" type="text">
+                    </div>
+                    <!-- Add option -->
+                    <div class="row col-5 m-0 mb-3 p-0">
+                        <button id="btn_addCustomOption" class="btn btn-primary m-0">addCustomOption</button>
                     </div>
 
                 </div>
@@ -2012,9 +1999,14 @@
 
         // Just-validate library stuff
         const validator = new JustValidate('#building_form');
+        // For some reason, you have to tell the validator to actually submit the form when it's successfully validated
+        validator.onSuccess(event => {
+            document.getElementById("building_form").submit();
+        });
+        // Grab every single field on the page
         const allInputs = document.querySelectorAll("input, select, textarea");
 
-        // Need to make lists of IDs to check against when adding validation
+        // Need to make lists of IDs to check against when adding validation to calculations table
         const calculationSectionInputs = document.querySelectorAll("#calculations input").values();
         const priceIds = [];
         const taxIds = [];
@@ -2033,7 +2025,7 @@
 
         // Made it a function in case of a need to re-validate the whole page
         // Must be passed a querySelectorAll() set of inputs to check
-        // TODO: remove/add validation fields when things are disabled/hidden
+        // TODO: remove/add validation from calculations table fields
         function addValidation(querySelect) {
 
             for (let i = 0; i < querySelect.length; i++) {
@@ -2205,6 +2197,34 @@
                     }
                 }
 
+                // Prices elsewhere
+                else if (querySelect.item(i).id.toLowerCase().includes("cost")) {
+                    // If field is required
+                    if (querySelect.item(i).required) {
+                        validator.addField('#' + querySelect.item(i).id, [
+                            {
+                                rule: 'required', 
+                                errorMessage: 'Please enter a dollar amount',
+                            },
+                            {
+                                rule: 'customRegexp',
+                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
+                                errorMessage: 'Enter a valid dollar amount',
+                            },
+                        ]);
+                    }
+                    // If field is not required, only check the format
+                    else {
+                        validator.addField('#' + querySelect.item(i).id, [
+                            {
+                                rule: 'customRegexp',
+                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
+                                errorMessage: 'Enter a valid dollar amount',
+                            },
+                        ]);
+                    }                    
+                }
+
                 // Tax inputs in calculations table
                 // I wrote this regular expression https://regex101.com/r/9BLNOW/1
                 else if (taxIds.includes(querySelect.item(i).id)) {
@@ -2279,6 +2299,8 @@
 
         // For removing validation from a set of fields
         // Must be passed a querySelectAll() set of inputs
+        // You might think this needs to remove event listeners, but it doesn't as a result of JS being semi-smart
+        // and not adding more listeners where the named function is already attached to a listener on the element 
         function removeValidation(querySelect) {
             for (let i = 0; i < querySelect.length; i++) {
                 if (validator.fieldIds.has("#" + querySelect.item(i).id)) {
@@ -2290,12 +2312,15 @@
         // Add automatic validation listening
         function addAutoValidateListener() {
             const mapIter = validator.fieldIds.keys();
+            var currentFieldId;
             for (let i = 0; i < validator.fieldIds.size; i++) {
-                document.getElementById(mapIter.next().value.substring(1)).addEventListener("keyup", autoValidateListener);
+                currentFieldId = mapIter.next().value;
+                document.querySelector(currentFieldId).addEventListener("keyup", autoValidateListener);
+                console.log("Adding autoValidateListener to " + currentFieldId);
             }
         }
         
-        // Auto validate input
+        // Auto validate input when typing
         function autoValidateListener(event) {
             if (event.key != "Tab") validator.revalidateField("#" + this.id);
         }
@@ -2462,6 +2487,8 @@
 
 
         // Show/hide correct transaction types and tables
+        // Also remove validation from hidden calculation tables if the transaction type changes
+        // (so that the form will actually submit)
         const transactionTypeRadios = document.getElementsByClassName("radio_transactionType");
         const landlordInformationInputs = document.getElementById("landlord_information").getElementsByTagName("input");
         for (var i = 0; i < transactionTypeRadios.length; i++) {
@@ -2473,12 +2500,15 @@
             if (document.getElementById("input_cash").checked == true) {
                 if (document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.remove("visually-hidden");
+                    addValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
                 }
                 if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_rto").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
                 }
                 if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_stock").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
                 }
                 if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("landlord_information").classList.add("visually-hidden");
@@ -2497,12 +2527,15 @@
             else if (document.getElementById("input_rto").checked == true) {
                 if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
                 }
                 if (document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_rto").classList.remove("visually-hidden");
+                    addValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
                 }
                 if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_stock").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
                 }
                 if (document.getElementById("landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("landlord_information").classList.remove("visually-hidden");
@@ -2521,12 +2554,15 @@
             else if (document.getElementById("input_stock").checked == true) {
                 if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_cash").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
                 }
                 if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_rto").classList.add("visually-hidden");
+                    removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
                 }
                 if (document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
                     document.getElementById("calculation_stock").classList.remove("visually-hidden");
+                    addValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
                 }
                 if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("landlord_information").classList.add("visually-hidden");

@@ -162,6 +162,15 @@ input:focus:has(+ .just-validate-error-label) {
     /* background-color: rgb(228, 54, 54); */
     color: rgb(235, 55, 55) !important;
 }
+.just-validate-error-field, .just-validate-error-field:focus, .just-validate-error-field:focus-visible {
+    border: 1px solid (235, 55, 55);
+    color: rgb(200, 39, 39);
+}
+
+.just-validate-success-field:focus, .just-validate-success-field:focus-visible {
+    border: 1px solid green;
+    color: rgb(0, 106, 0);
+}
 
 #save_button {
     transition: .3s;
@@ -235,4 +244,9 @@ label, .material-icons, .search-icon, select {
 /* Other colors */
 .bg-insight-primary {
     background-color: rgb(167, 77, 77);
+}
+
+/* Purely for intellisense */
+.hidden-section {
+    text-decoration: inherit;
 }
