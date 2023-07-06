@@ -1374,10 +1374,10 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="input_salesTaxAmount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="txt_salesTaxAmount" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
-                                <td id="auto_input_salesTaxAmount" class="fst-italic border-start text-center fs-7">[Manual]</td>
+                                <td id="auto_txt_salesTaxAmount" class="fst-italic border-start text-center fs-7">[Manual]</td>
                             </tr>
                             <!-- Subtotal -->
                             <tr class="border-bottom border-dark table-secondary">
@@ -2027,6 +2027,8 @@
         function addValidation(querySelect) {
 
             for (let i = 0; i < querySelect.length; i++) {
+                
+                console.log("Processing " + querySelect.item(i).id + "...");
         
                 // Email fields (id must contain "email")
                 if (querySelect.item(i).id.toLowerCase().includes("email")) {
@@ -2302,6 +2304,7 @@
         function removeValidation(querySelect) {
             for (let i = 0; i < querySelect.length; i++) {
                 if (validator.fieldIds.has("#" + querySelect.item(i).id)) {
+                    console.log("Validator contains field " + querySelect.item(i).id + ". Removing...");
                     validator.removeField("#" + querySelect.item(i).id);
                 }
             }
@@ -2492,6 +2495,7 @@
         for (var i = 0; i < transactionTypeRadios.length; i++) {
             transactionTypeRadios.item(i).addEventListener("click", transactionTypeClick);
         }
+        transactionTypeClick();
         function transactionTypeClick() {
             document.getElementById("noTransactionType").classList.add("visually-hidden");
             // CASH
@@ -2513,6 +2517,7 @@
                 }
                 if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("nav_landlord_information").classList.add("visually-hidden");
+                    removeValidation(document.querySelectorAll("#landlord_information input"));
                 }
                 for (var i = 0; i < landlordInformationInputs.length; i++) {
                     landlordInformationInputs.item(i).disabled = true;
@@ -2537,6 +2542,7 @@
                 }
                 if (document.getElementById("landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("landlord_information").classList.remove("visually-hidden");
+                    addValidation(document.querySelectorAll("#landlord_information input"));
                 }
                 if (document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("nav_landlord_information").classList.remove("visually-hidden");
@@ -2567,6 +2573,7 @@
                 }
                 if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
                     document.getElementById("nav_landlord_information").classList.add("visually-hidden");
+                    removeValidation(document.querySelectorAll("#landlord_information input"));
                 }
                 for (var i = 0; i < landlordInformationInputs.length; i++) {
                     landlordInformationInputs.item(i).disabled = true;
