@@ -15,76 +15,6 @@
 
 <body class="row bg-dark m-0 p-0">
 
-    <!-- Offcanvas items
-
-        General
-            Status dropdown
-            Condition dropdown
-        Dealer (very big)
-            Dealer name
-            Lot name
-            Sales person
-            StreetAddress
-            City
-            State
-            Zip
-            Phone
-            Cell phone
-            fax
-            Email address
-            EIN
-            Commission $
-            Date paid
-        Manufacturer (also very big)
-            Name
-            Attention to
-            Streeet address
-            City
-            State
-            Zip
-            Phone
-            Cell phone
-            Fax
-            Email
-        Delivery
-            Date scheduled to lot
-            Date delivered to lot
-            Assigned driver
-            Cost
-            Date paid
-            Date scheduled to custoemr
-            Date delivered to customer
-            Assigned driver
-            Cost
-            Date paid
-        Comments
-            Inhouse
-            Dealer
-            Logistics
-        Labor costs
-            Builder
-            Cost
-            Date paid
-            Roofer
-            Cost
-            Date paid
-        File upload
-            File list
-            Choose file
-            Upload
-            Number of documents added
-        Scheduling (big old thing)
-        Repairs (redirects to other page?)
-        Print customer (hopefully shouldn't be a huge problem...)
-            Generates pdf form
-        Save/delete (lol)
-            Replace with Danger zone! Delete building
-            Put at very bottom
-        
-        
-    -->
-        
-    
     
     <form id="building_form" action="index.html" class="row col-12 m-0 p-0">
         
@@ -1999,7 +1929,7 @@
         const validator = new JustValidate('#building_form');
         // For some reason, you have to tell the validator to actually submit the form when it's successfully validated
         validator.onSuccess(event => {
-            console.log("Submitting form");
+            // console.log("Submitting form");
             document.getElementById("building_form").submit();
         });
         // Grab every single field on the page
@@ -2028,7 +1958,7 @@
 
             for (let i = 0; i < querySelect.length; i++) {
                 
-                console.log("Processing " + querySelect.item(i).id + "...");
+                // console.log("Processing " + querySelect.item(i).id + "...");
         
                 // Email fields (id must contain "email")
                 if (querySelect.item(i).id.toLowerCase().includes("email")) {
@@ -2304,7 +2234,7 @@
         function removeValidation(querySelect) {
             for (let i = 0; i < querySelect.length; i++) {
                 if (validator.fieldIds.has("#" + querySelect.item(i).id)) {
-                    console.log("Validator contains field " + querySelect.item(i).id + ". Removing...");
+                    // console.log("Validator contains field " + querySelect.item(i).id + ". Removing...");
                     validator.removeField("#" + querySelect.item(i).id);
                 }
             }
