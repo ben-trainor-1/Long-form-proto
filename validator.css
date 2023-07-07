@@ -1,6 +1,6 @@
 
 /* For intellisense */
-.check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, .check-taxRate {
+.check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, .check-taxRate, .check-required {
     text-decoration: inherit;
 }
 

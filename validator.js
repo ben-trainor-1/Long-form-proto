@@ -15,6 +15,9 @@
  * - check-email
  * - check-dollarAmt
  * - check-taxRate
+ * 
+ * Required inputs
+ * - check-required
  */
 
 
@@ -133,4 +136,36 @@ function validateField(event) {
         }
     }
     console.log(regex.test(event.target.value));
+}
+
+
+// Check all required fields
+function validateRequiredFields() {
+    const requiredFields = document.getElementsByClassName("check-required");
+    for (let i = 0; i < requiredFields.length; i++) {
+        if (requiredFields.item(i).value == "") {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Check all field formats
+function validateFormattedFields() {
+    if (document.getElementsByClassName("check-is-invalid").length == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Check if whole form is valid
+function formIsValid() {
+    if (validateFormattedFields() && validateRequiredFields()) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
