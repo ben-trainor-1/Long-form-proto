@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
         rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="validator.css">
     <script src="validator.js"></script>
     
 </head>
@@ -18,16 +19,23 @@
 
 
     <form id="aspnetForm" action="" class="row justify-content-center m-0 p-0">
-        
-        <div id="noValidation" class="row col-2 m-0 p-0">
 
-            <input type="submit" name="menuButton1" id="menuButton1" class="btn btn-primary">
+        <div id="noValidation" class="row col-2 m-0 p-2">
 
+            <input type="submit" name="menuButton1" id="menuButton1" class="btn btn-secondary fw-bold" value="Go somewhere else">
+            
         </div>
         
-        <div id="yesValidation" class="row col-2 m-0 p-0">
-
-            <input type="text" name="menuButton1" id="menuButton1" class="form-control ">
+        <div id="yesValidation" class="row col-2 m-0 p-2">
+            
+            <input type="submit" name="saveButton" id="saveButton" class="btn btn-warning fw-bold mb-2" value="Save">
+            <input type="text" name="input1" id="input1" class="form-control check-valid-input check-phone mb-2" placeholder="Enter phone">
+            <input type="text" name="input2" id="input2" class="form-control check-valid-input check-ssn mb-2" placeholder="Enter ssn">
+            <input type="text" name="input3" id="input3" class="form-control check-valid-input check-state mb-2" placeholder="Enter state">
+            <input type="text" name="input4" id="input4" class="form-control check-valid-input check-zip mb-2" placeholder="Enter zip">
+            <input type="text" name="input5" id="input5" class="form-control check-valid-input check-email mb-2" placeholder="Enter email">
+            <input type="text" name="input6" id="input6" class="form-control check-valid-input check-dollarAmt mb-2" placeholder="Enter dollarAmt">
+            <input type="text" name="input7" id="input7" class="form-control check-valid-input check-taxRate mb-2" placeholder="Enter taxRate">
 
         </div>
         

@@ -1,0 +1,15 @@
+
+/* For intellisense */
+.check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, .check-taxRate {
+    text-decoration: inherit;
+}
+
+/* Styling for valid/invalid fields */
+.check-is-valid {
+    border: 1px solid green !important;
+    box-shadow: none !important;
+}
+.check-is-invalid {
+    border: 1px solid red !important;
+    box-shadow: none !important;
+}
