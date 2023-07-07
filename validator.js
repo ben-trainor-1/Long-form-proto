@@ -21,6 +21,11 @@
  */
 
 
+// TODO: handle drop down lists
+// TODO: handle radio buttons
+// TODO: handle adding/removing validation when sections are hidden/shown
+
+
 // Wait for document to be loaded fully
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -31,20 +36,26 @@ document.addEventListener("DOMContentLoaded", () => {
 // Add validator to all fields inside specified container id with .check-valid-input class 
 function initializeValidator(containerId) {
     
-    var container = document.getElementById(containerId.toString());
+    var container = document.getElementById(containerId);
     if (container != null) {
         var elements = container.getElementsByClassName("check-valid-input");
+        for (let i = 0; i < elements.length; i++) {
+            addValidation(elements.item(i).id);
+        }
     }
     else {
         console.error("Could not find contained with specified id: " + containerId + ".");
     }
-    for (let i = 0; i < elements.length; i++) {
-        console.log("Adding validation to " + elements.item(i).id);
-        tryAddRegex(elements.item(i).id, elements.item(i).classList);
-        addValidateListeners(elements.item(i).id);
-    }
     
 }
+
+// Adds validation to a single field
+function addValidation(inputId) {
+    var element = document.getElementById(inputId);
+    tryAddRegex(element.id, element.classList);
+    addValidateListeners(element.id);
+}
+
 
 // Called by initializeValidator to check which rules to add to each element
 // Also add listeners to check rule when field is being edited
@@ -123,32 +134,35 @@ function addValidateListeners(inputId) {
 // Validation function to check
 function validateField(event) {
 
-    console.log(event.target.pattern);
-
-    // If field is not empty
-    if (event.target.value != "") {
-        // If there's a regular expression to check against
-        if (event.target.pattern != "") {
-            var regex = new RegExp(event.target.pattern);
-            if (regex.test(event.target.value)) {
-                applyStyle(event.target.id, "valid");
+    if (!event.target.classList.contains("check-ignore")) {
+        // If field is not empty
+        if (event.target.value != "") {
+            // If there's a regular expression to check against
+            if (event.target.pattern != "") {
+                var regex = new RegExp(event.target.pattern);
+                if (regex.test(event.target.value)) {
+                    applyStyle(event.target.id, "valid");
+                }
+                else {
+                    applyStyle(event.target.id, "invalid");
+                }
             }
             else {
-                applyStyle(event.target.id, "invalid");
+                applyStyle(event.target.id, "unstyled");
             }
         }
+        // If field is empty
         else {
-            applyStyle(event.target.id, "unstyled");
+            if (event.target.classList.contains("check-required")) {
+                applyStyle(event.target.id, "invalid");
+            }
+            else {
+                applyStyle(event.target.id, "unstyled");
+            }
         }
     }
-    // If field is empty
     else {
-        if (event.target.classList.contains("check-required")) {
-            applyStyle(event.target.id, "invalid");
-        }
-        else {
-            applyStyle(event.target.id, "unstyled");
-        }
+        // Don't check field
     }
     
 }
@@ -175,8 +189,9 @@ function applyStyle(inputId, state) {
     }
 }
 
-// Check all field formats
-function validateFormattedFields() {
+// Check if whole form is valid
+function formIsValid(buttonId) {
+    clickAllFields(document.getElementById(buttonId).name); // Click all fields in corresponding container
     if (document.getElementsByClassName("check-is-invalid").length == 0) {
         return true;
     }
@@ -185,30 +200,24 @@ function validateFormattedFields() {
     }
 }
 
-// Check all required fields
-function validateRequiredFields() {
-    const requiredFields = document.getElementsByClassName("check-required");
-    for (let i = 0; i < requiredFields.length; i++) {
-        if (requiredFields.item(i).value == "") {
-            return false;
+// Clicks all fields to activate validateField() and make sure all necessary fields are filled out and formatted correctly
+function clickAllFields(containerId) {
+    var container = document.getElementById(containerId);
+    if (container != null) {
+        var elements = container.getElementsByClassName("check-valid-input");
+        for (let i = 0; i < elements.length; i++) {
+            elements.item(i).click();
         }
     }
-    return true;
-}
-
-// Check if whole form is valid
-function formIsValid() {
-    if (validateFormattedFields() && validateRequiredFields()) {
-        return true;
-    }
     else {
-        return false;
+        console.log("Could not find container");
     }
 }
 
 // For submit button to check validation before clicking hidden asp button
+// Clicks the trigger first
 function trySubmitForm(aspButton) {
-    if (formIsValid()) {
+    if (formIsValid(aspButton + "_trigger")) {
         const theButton = document.getElementById(aspButton);
         theButton.click();
     }

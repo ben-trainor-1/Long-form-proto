@@ -1,15 +1,18 @@
 
 /* For intellisense */
-.check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, .check-taxRate, .check-required {
+.check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, 
+.check-taxRate, .check-required, .check-ignore {
     text-decoration: inherit;
 }
 
 /* Styling for valid/invalid fields */
-.check-is-valid {
+.check-is-valid:focus {
     border: 1px solid green !important;
     box-shadow: none !important;
+    background-color: rgba(228, 251, 228, 0.6);
 }
 .check-is-invalid {
     border: 1px solid red !important;
     box-shadow: none !important;
+    background-color: rgba(255, 214, 214, 0.6) !important;
 }
