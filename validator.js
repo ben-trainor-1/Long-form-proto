@@ -40,7 +40,7 @@ function initializeValidator(containerId) {
     }
     for (let i = 0; i < elements.length; i++) {
         console.log("Adding validation to " + elements.item(i).id);
-        addRule(elements.item(i).id, elements.item(i).classList);
+        tryAddRegex(elements.item(i).id, elements.item(i).classList);
         addValidateListeners(elements.item(i).id);
     }
     
@@ -48,7 +48,7 @@ function initializeValidator(containerId) {
 
 // Called by initializeValidator to check which rules to add to each element
 // Also add listeners to check rule when field is being edited
-function addRule(inputId, classList) {
+function tryAddRegex(inputId, classList) {
     console.log(inputId + ": [" + classList + "]");
     if (classList.contains("check-phone")) {
         addRegularExpression(inputId, "phone");
@@ -72,7 +72,7 @@ function addRule(inputId, classList) {
         addRegularExpression(inputId, "taxRate");
     }
     else {
-        console.error("No qualifying check-class-type was found.");
+        console.log("No regular expression needed.");
     }
 }
 
@@ -122,32 +122,57 @@ function addValidateListeners(inputId) {
 
 // Validation function to check
 function validateField(event) {
-    var regex = new RegExp(event.target.pattern);
-    if (regex.test(event.target.value) && !event.target.classList.contains("check-is-valid")) {
-        event.target.classList.add("check-is-valid");
-        if (event.target.classList.contains("check-is-invalid")) {
-            event.target.classList.remove("check-is-invalid");
+
+    console.log(event.target.pattern);
+
+    // If field is not empty
+    if (event.target.value != "") {
+        // If there's a regular expression to check against
+        if (event.target.pattern != "") {
+            var regex = new RegExp(event.target.pattern);
+            if (regex.test(event.target.value)) {
+                applyStyle(event.target.id, "valid");
+            }
+            else {
+                applyStyle(event.target.id, "invalid");
+            }
+        }
+        else {
+            applyStyle(event.target.id, "unstyled");
         }
     }
-    else if (!regex.test(event.target.value) && !event.target.classList.contains("check-is-invalid")) {
-        event.target.classList.add("check-is-invalid");
-        if (event.target.classList.contains("check-is-valid")) {
-            event.target.classList.remove("check-is-valid");
+    // If field is empty
+    else {
+        if (event.target.classList.contains("check-required")) {
+            applyStyle(event.target.id, "invalid");
+        }
+        else {
+            applyStyle(event.target.id, "unstyled");
         }
     }
-    console.log(regex.test(event.target.value));
+    
 }
 
-
-// Check all required fields
-function validateRequiredFields() {
-    const requiredFields = document.getElementsByClassName("check-required");
-    for (let i = 0; i < requiredFields.length; i++) {
-        if (requiredFields.item(i).value == "") {
-            return false;
-        }
+// Add class names to fields accordingly using "valid", "invalid", and "unstyled"
+function applyStyle(inputId, state) {
+    var element = document.getElementById(inputId);
+    switch (state) {
+        case "valid":
+            if (!element.classList.contains("check-is-valid")) element.classList.add("check-is-valid");
+            if (element.classList.contains("check-is-invalid")) element.classList.remove("check-is-invalid");
+            break;
+        case "invalid":
+            if (!element.classList.contains("check-is-invalid")) element.classList.add("check-is-invalid");
+            if (element.classList.contains("check-is-valid")) element.classList.remove("check-is-valid");
+            break;
+        case "unstyled":
+            if (element.classList.contains("check-is-valid")) element.classList.remove("check-is-valid");
+            if (element.classList.contains("check-is-invalid")) element.classList.remove("check-is-invalid");
+            break;
+        default:
+            console.error("Invalid style state given.");
+            break;
     }
-    return true;
 }
 
 // Check all field formats
@@ -160,6 +185,17 @@ function validateFormattedFields() {
     }
 }
 
+// Check all required fields
+function validateRequiredFields() {
+    const requiredFields = document.getElementsByClassName("check-required");
+    for (let i = 0; i < requiredFields.length; i++) {
+        if (requiredFields.item(i).value == "") {
+            return false;
+        }
+    }
+    return true;
+}
+
 // Check if whole form is valid
 function formIsValid() {
     if (validateFormattedFields() && validateRequiredFields()) {
@@ -168,4 +204,16 @@ function formIsValid() {
     else {
         return false;
     }
+}
+
+// For submit button to check validation before clicking hidden asp button
+function trySubmitForm(aspButton) {
+    if (formIsValid()) {
+        const theButton = document.getElementById(aspButton);
+        theButton.click();
+    }
+}
+
+function printClicked() {
+    console.log("clicked invis button");
 }
