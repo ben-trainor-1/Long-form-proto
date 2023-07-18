@@ -144,6 +144,9 @@ function validateField(event) {
                     applyStyle(event.target.id, "invalid");
                 }
             }
+            else if (event.target.classList.contains("check-required")) {
+                applyStyle(event.target.id, "valid");
+            }
             else {
                 applyStyle(event.target.id, "unstyled");
             }

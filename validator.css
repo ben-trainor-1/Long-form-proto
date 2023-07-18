@@ -11,8 +11,8 @@
     box-shadow: none !important;
     background-color: rgba(228, 251, 228, 0.6);
 }
-.check-is-invalid {
-    border: 1px solid red !important;
-    box-shadow: none !important;
-    background-color: rgba(255, 214, 214, 0.6) !important;
+.check-is-invalid, .check-is-invalid:focus {
+    border: 1px solid rgb(235, 55, 55);
+    background-color: rgb(255, 241, 241) !important;
+    color: rgb(200, 39, 39);
 }
