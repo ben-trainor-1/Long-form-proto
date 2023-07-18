@@ -231,7 +231,7 @@ function clickAllFields(containerId) {
         }
     }
     else {
-        console.log("Could not find container");
+        console.error("Could not find container with specified id");
     }
 }
 

@@ -1,7 +1,7 @@
 
 /* For intellisense */
 .check-valid-input, .check-phone, .check-ssn, .check-state, .check-zip, .check-email, .check-dollarAmt, 
-.check-taxRate, .check-required, .check-ignore {
+.check-taxRate, .check-required, .check-ignore, .check-toggler {
     text-decoration: inherit;
 }
 
