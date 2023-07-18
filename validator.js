@@ -4,7 +4,7 @@
 
 
 /**
- * Main class
+ * Main class (put this on everything you want validated)
  * - check-valid-input
  * 
  * Input type classes
@@ -19,12 +19,19 @@
  * Required inputs
  * - check-required
  * 
+ * Ignored fields (added programmatically or manually for debugging)
+ * - check-ignore
+ * 
+ * Toggle checkboxes for hidden sections
+ * - check-toggler
+ * 
  * Set default value of drop down lists to -1 and add check-required
+ * 
+ * NOTE: radio buttons are not handled
  */
 
 
 // TODO: handle radio buttons
-// TODO: handle adding/removing validation when sections are hidden/shown
 
 
 // Wait for document to be loaded fully
@@ -34,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// Add validator to all fields inside specified container id with .check-valid-input class 
+// Add validator to all fields inside specified container id with .check-valid-input class
+// Add toggle function to checkboxes that correspond to hidden sections
 function initializeValidator(containerId) {
     
     var container = document.getElementById(containerId);
@@ -43,9 +51,13 @@ function initializeValidator(containerId) {
         for (let i = 0; i < elements.length; i++) {
             addValidation(elements.item(i).id);
         }
+        var toggles = container.getElementsByClassName("check-toggler");
+        for (let i = 0; i < toggles.length; i++) {
+            addToggleListener(toggles.item(i).id);
+        }
     }
     else {
-        console.error("Could not find contained with specified id: " + containerId + ".");
+        console.error("Could not find container with specified id: " + containerId + ".");
     }
     
 }
@@ -132,6 +144,26 @@ function addValidateListeners(inputId) {
     document.getElementById(inputId).addEventListener("change", validateField);
 }
 
+// Add listeners to toggle checkboxes
+function addToggleListener(inputId) {
+    document.getElementById(inputId).addEventListener("click", toggleSection);
+    document.getElementById(inputId).addEventListener("change", toggleSection);
+}
+
+// Toggles display and validation on toggleable sections
+function toggleSection(event) {
+    var suffix = "_container";
+    var hiddenSection = document.getElementById(event.target.id + suffix);
+    if (event.target.checked && hiddenSection.classList.contains("visually-hidden")) {
+        hiddenSection.classList.remove("visually-hidden");
+        enableValidation(hiddenSection.getElementsByClassName("check-valid-input"));
+    }
+    else if (!event.target.checked && !hiddenSection.classList.contains("visually-hidden")) {
+        hiddenSection.classList.add("visually-hidden");
+        disableValidation(hiddenSection.getElementsByClassName("check-valid-input"));
+    }
+}
+
 // Validation function to check
 function validateField(event) {
 
@@ -190,6 +222,28 @@ function applyStyle(inputId, state) {
     }
 }
 
+// Re-enables validation for previously hidden fields; takes in a document.getElementsByClassName() call
+function enableValidation(elements) {
+    for (var i = 0; i < elements.length; i++) {
+        if (elements.item(i).classList.contains("check-ignore")) {
+            elements.item(i).classList.remove("check-ignore");
+            elements.item(i).click();
+        }
+    }
+}
+
+// Disables validation for previously hidden fields; takes in a document.getElementsByClassName() call
+function disableValidation(elements) {
+    for (var i = 0; i < elements.length; i++) {
+        if (!elements.item(i).classList.contains("check-ignore")) {
+            elements.item(i).classList.add("check-ignore");
+        }
+        if (elements.item(i).classList.contains("check-is-invalid")) {
+            elements.item(i).classList.remove("check-is-invalid");
+        }
+    }
+}
+
 // Check if whole form is valid
 function formIsValid(buttonId) {
     clickAllFields(document.getElementById(buttonId).name); // Click all fields in corresponding container
@@ -207,7 +261,7 @@ function clickAllFields(containerId) {
     if (container != null) {
         var elements = container.getElementsByClassName("check-valid-input");
         for (let i = 0; i < elements.length; i++) {
-            elements.item(i).click();
+            if (!elements.item(i).classList.contains("check-ignore")) elements.item(i).click();
         }
     }
     else {

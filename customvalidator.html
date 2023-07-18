@@ -26,7 +26,7 @@
             
         </div>
         
-        <div id="yesValidation" class="row col-2 m-0 p-2">
+        <div id="yesValidation" class="row col-4 m-0 p-2">
             
             <input type="button" name="yesValidation" id="invisButton_trigger" class="btn btn-warning fw-bold mb-2" value="Save" onclick="trySubmitForm('invisButton')">
             <input type="text" name="input1" id="input1" class="form-control check-valid-input check-phone mb-2" placeholder="Enter phone">
@@ -36,6 +36,7 @@
             <input type="text" name="input5" id="input5" class="form-control check-valid-input check-required check-email mb-2" placeholder="Enter email">
             <input type="text" name="input6" id="input6" class="form-control check-valid-input check-dollarAmt mb-2" placeholder="Enter dollarAmt">
             <input type="text" name="input7" id="input7" class="form-control check-valid-input check-taxRate mb-2" placeholder="Enter taxRate">
+            
             <select name="input8" id="input8" class="check-valid-input check-required form-select mb-2">
                 <option value="-1" disabled selected>Please select an option...</option>
                 <option value="1">Option 1</option>
@@ -48,21 +49,34 @@
                 <option value="2">Option 2</option>
                 <option value="3">Option 3</option>
             </select>
-            <div class="form-check">
-                <input type="radio" name="radio1" id="radio1_check1" class="form-check-input">
-                <label for="radio1_check1" class="form-check-label">Check 1</label>
+
+            <div class="radio-section m-0 p-0 mb-2" id="radio1">
+                <div class="form-check">
+                    <input type="radio" name="radio1" id="radio1_check1" class="form-check-input">
+                    <label for="radio1_check1" class="form-check-label">Check 1</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="radio1" id="radio1_check2" class="form-check-input">
+                    <label for="radio1_check2" class="form-check-label">Check 2</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="radio1" id="radio1_check3" class="form-check-input">
+                    <label for="radio1_check3" class="form-check-label">Check 3</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="radio1" id="radio1_check4" class="form-check-input">
+                    <label for="radio1_check4" class="form-check-label">Check 4</label>
+                </div>
             </div>
-            <div class="form-check">
-                <input type="radio" name="radio1" id="radio1_check2" class="form-check-input">
-                <label for="radio1_check2" class="form-check-label">Check 2</label>
+
+            <div class="form-check mb-2">
+                <input type="checkbox" name="toggleButton1" id="toggleButton1" class="form-check-input check-toggler">
+                <label for="toggleButton1" class="form-label">Show/hide section below</label>
             </div>
-            <div class="form-check">
-                <input type="radio" name="radio1" id="radio1_check3" class="form-check-input">
-                <label for="radio1_check3" class="form-check-label">Check 3</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" name="radio1" id="radio1_check4" class="form-check-input">
-                <label for="radio1_check4" class="form-check-label">Check 4</label>
+            <div id="toggleButton1_container" class="visually-hidden m-0 p-0">
+                <input type="text" name="input01" id="input01" class="form-control check-valid-input check-phone mb-2" placeholder="Enter phone">
+                <input type="text" name="input02" id="input02" class="form-control check-valid-input check-ssn mb-2" placeholder="Enter ssn">
+                <input type="text" name="input03" id="input03" class="form-control check-valid-input check-state mb-2" placeholder="Enter state">
             </div>
 
             <input type="button" style="display: none;" id="invisButton" onclick="printClicked()">
