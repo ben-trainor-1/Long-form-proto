@@ -18,10 +18,11 @@
  * 
  * Required inputs
  * - check-required
+ * 
+ * Set default value of drop down lists to -1 and add check-required
  */
 
 
-// TODO: handle drop down lists
 // TODO: handle radio buttons
 // TODO: handle adding/removing validation when sections are hidden/shown
 
@@ -135,8 +136,8 @@ function addValidateListeners(inputId) {
 function validateField(event) {
 
     if (!event.target.classList.contains("check-ignore")) {
-        // If field is not empty
-        if (event.target.value != "") {
+        // If field is not empty or doesn't contain -1 (drop down lists)
+        if (event.target.value != "" && event.target.value != -1) {
             // If there's a regular expression to check against
             if (event.target.pattern != "") {
                 var regex = new RegExp(event.target.pattern);
@@ -218,6 +219,7 @@ function clickAllFields(containerId) {
 // Clicks the trigger first
 function trySubmitForm(aspButton) {
     if (formIsValid(aspButton + "_trigger")) {
+        console.log("Form validated successfully.");
         const theButton = document.getElementById(aspButton);
         theButton.click();
     }

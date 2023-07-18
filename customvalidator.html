@@ -32,10 +32,38 @@
             <input type="text" name="input1" id="input1" class="form-control check-valid-input check-phone mb-2" placeholder="Enter phone">
             <input type="text" name="input2" id="input2" class="form-control check-valid-input check-ssn mb-2" placeholder="Enter ssn">
             <input type="text" name="input3" id="input3" class="form-control check-valid-input check-state mb-2" placeholder="Enter state">
-            <input type="text" name="input4" id="input4" class="form-control check-valid-input check-zip check-ignore mb-2" placeholder="Enter zip">
+            <input type="text" name="input4" id="input4" class="form-control check-valid-input check-zip mb-2" placeholder="Enter zip">
             <input type="text" name="input5" id="input5" class="form-control check-valid-input check-required check-email mb-2" placeholder="Enter email">
             <input type="text" name="input6" id="input6" class="form-control check-valid-input check-dollarAmt mb-2" placeholder="Enter dollarAmt">
             <input type="text" name="input7" id="input7" class="form-control check-valid-input check-taxRate mb-2" placeholder="Enter taxRate">
+            <select name="input8" id="input8" class="check-valid-input check-required form-select mb-2">
+                <option value="-1" disabled selected>Please select an option...</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <select name="input9" id="input9" class="form-select mb-2">
+                <option value="-1" disabled selected>Please select an option...</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <div class="form-check">
+                <input type="radio" name="radio1" id="radio1_check1" class="form-check-input">
+                <label for="radio1_check1" class="form-check-label">Check 1</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="radio1" id="radio1_check2" class="form-check-input">
+                <label for="radio1_check2" class="form-check-label">Check 2</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="radio1" id="radio1_check3" class="form-check-input">
+                <label for="radio1_check3" class="form-check-label">Check 3</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="radio1" id="radio1_check4" class="form-check-input">
+                <label for="radio1_check4" class="form-check-label">Check 4</label>
+            </div>
 
             <input type="button" style="display: none;" id="invisButton" onclick="printClicked()">
         </div>
