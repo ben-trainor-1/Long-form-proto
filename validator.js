@@ -65,76 +65,47 @@ function initializeValidator(containerId) {
 // Adds validation to a single field
 function addValidation(inputId) {
     var element = document.getElementById(inputId);
-    tryAddRegex(element.id, element.classList);
+    // tryAddRegex(element.id, element.classList);
     addValidateListeners(element.id);
 }
 
-
-// Called by initializeValidator to check which rules to add to each element
-// Also add listeners to check rule when field is being edited
-function tryAddRegex(inputId, classList) {
-    console.log(inputId + ": [" + classList + "]");
+// Library of regular expressions
+function getRegularExpression(classList) {
+    // phone
     if (classList.contains("check-phone")) {
-        addRegularExpression(inputId, "phone");
+        return "^[\\x28][0-9]{3}[\\x29][ ][0-9]{3}[\\-][0-9]{4}$";
     }
+    // ssn
     else if (classList.contains("check-ssn")) {
-        addRegularExpression(inputId, "ssn");
+        return "^[0-9]{4}$";
     }
+    // state
     else if (classList.contains("check-state")) {
-        addRegularExpression(inputId, "state");
+        return "^(A[KLRZ])|(C[AOT])|(D[CE])|(FL)|(GA)|(HI)|(I[ADLN])|(K[SY])|(LA)|(M[ADEINOST])|(N[CDEHJMVY])|(O[HKR])|(P[AR])|(RI)|(S[CD])|(T[NX])|(UT)|(V[AIT])|(W[AIVY])$";
     }
+    // zip
     else if (classList.contains("check-zip")) {
-        addRegularExpression(inputId, "zip");
+        return "^([0-9]{5})([\\-][0-9]{4})?$";
     }
+    // email
     else if (classList.contains("check-email")) {
-        addRegularExpression(inputId, "email");
+        return "^.{1,}[@].{1,}[\.].{2,}$"; // Super generic, not greatly robust, but will get rid of plenty of errors
     }
+    // dollarAmt
     else if (classList.contains("check-dollarAmt")) {
-        addRegularExpression(inputId, "dollarAmt");
+        return "^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$";
     }
+    // taxRate
     else if (classList.contains("check-taxRate")) {
-        addRegularExpression(inputId, "taxRate");
+        return "(^[0]?[.]{1}[0-9]{0,10}[1-9]{1}$)|(^[1-9]{1}[0-9]{0,2}([.]{1}[0-9]{0,10}[1-9]{1})?$)";
     }
+    // default
     else {
-        console.log("No regular expression needed.");
+        console.log("No regular expression found.");
+        return null;
     }
 }
 
-// Add regular expression to the element
-function addRegularExpression(inputId, type) {
-    var regex = "";
-    switch (type) {
-        case "phone":
-            regex = "^[\\x28][0-9]{3}[\\x29][ ][0-9]{3}[\\-][0-9]{4}$";
-            break;
-        case "ssn":
-            regex = "^[0-9]{4}$";
-            break;
-        case "state":
-            regex = "^(A[KLRZ])|(C[AOT])|(D[CE])|(FL)|(GA)|(HI)|(I[ADLN])|(K[SY])|(LA)|(M[ADEINOST])|(N[CDEHJMVY])|(O[HKR])|(P[AR])|(RI)|(S[CD])|(T[NX])|(UT)|(V[AIT])|(W[AIVY])$";
-            break;
-        case "zip":
-            regex = "^([0-9]{5})([\\-][0-9]{4})?$";
-            break;
-        case "email":
-            regex = "^.{1,}[@].{1,}[\.].{2,}$"; // Super generic, not greatly robust, but will get rid of plenty of errors
-            break;
-        case "dollarAmt":
-            regex = "^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$";
-            break;
-        case "taxRate":
-            regex = "(^[0]?[.]{1}[0-9]{0,10}[1-9]{1}$)|(^[1-9]{1}[0-9]{0,2}([.]{1}[0-9]{0,10}[1-9]{1})?$)";
-            break;
-        default:
-            break;
-    }
-    if (regex != "") {
-        document.getElementById(inputId).pattern = regex;
-    }
-    else {
-        console.error("Could not find regular expression type.");
-    }
-}
 
 // Add listeners to make sure fields are checked whenever edited
 function addValidateListeners(inputId) {
@@ -168,11 +139,12 @@ function toggleSection(event) {
 function validateField(event) {
 
     if (!event.target.classList.contains("check-ignore")) {
+
         // If field is not empty or doesn't contain -1 (drop down lists)
         if (event.target.value != "" && event.target.value != -1) {
             // If there's a regular expression to check against
-            if (event.target.pattern != "") {
-                var regex = new RegExp(event.target.pattern);
+            if (getRegularExpression(event.target.classList) != null) {
+                var regex = new RegExp(getRegularExpression(event.target.classList));
                 if (regex.test(event.target.value)) {
                     applyStyle(event.target.id, "valid");
                 }
