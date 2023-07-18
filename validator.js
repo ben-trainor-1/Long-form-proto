@@ -1,9 +1,6 @@
 /**
  * Custom validator written by Ben and Sam
- */
-
-
-/**
+ * 
  * Main class (put this on everything you want validated)
  * - check-valid-input
  * 
