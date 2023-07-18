@@ -64,9 +64,7 @@ function initializeValidator(containerId) {
 
 // Adds validation to a single field
 function addValidation(inputId) {
-    var element = document.getElementById(inputId);
-    // tryAddRegex(element.id, element.classList);
-    addValidateListeners(element.id);
+    addValidateListeners(document.getElementById(inputId).id);
 }
 
 // Library of regular expressions
@@ -106,7 +104,6 @@ function getRegularExpression(classList) {
     }
 }
 
-
 // Add listeners to make sure fields are checked whenever edited
 function addValidateListeners(inputId) {
     console.log("Adding listeners to " + inputId);
@@ -137,9 +134,7 @@ function toggleSection(event) {
 
 // Validation function to check
 function validateField(event) {
-
     if (!event.target.classList.contains("check-ignore")) {
-
         // If field is not empty or doesn't contain -1 (drop down lists)
         if (event.target.value != "" && event.target.value != -1) {
             // If there's a regular expression to check against
@@ -169,7 +164,6 @@ function validateField(event) {
     else {
         // Don't check field
     }
-    
 }
 
 // Add class names to fields accordingly using "valid", "invalid", and "unstyled"
