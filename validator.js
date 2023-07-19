@@ -61,7 +61,8 @@ function initializeValidator(containerId) {
 
 // Adds validation to a single field
 function addValidation(inputId) {
-    addValidateListeners(document.getElementById(inputId).id);
+    addValidateListeners(document.getElementById(inputId));
+    addMasks(document.getElementById(inputId));
 }
 
 // Library of regular expressions
@@ -102,11 +103,30 @@ function getRegularExpression(classList) {
 }
 
 // Add listeners to make sure fields are checked whenever edited
-function addValidateListeners(inputId) {
-    console.log("Adding listeners to " + inputId);
-    document.getElementById(inputId).addEventListener("keyup", validateField);
-    document.getElementById(inputId).addEventListener("click", validateField);
-    document.getElementById(inputId).addEventListener("change", validateField);
+function addValidateListeners(element) {
+    console.log("Adding listeners to " + element.id);
+    element.addEventListener("keyup", validateField);
+    element.addEventListener("click", validateField);
+    element.addEventListener("change", validateField);
+}
+
+// Add masks to phones, zips, etc
+function addMasks(element) {
+    if (element.classList.contains("check-phone")) {
+        element.addEventListener("keyup", phoneMask);
+        element.addEventListener("change", phoneMask);
+    }
+    else if (element.classList.contains("check-ssn")) {
+        element.addEventListener("keyup", ssnMask);
+        element.addEventListener("change", ssnMask);
+    }
+    else if (element.classList.contains("check-zip")) {
+        element.addEventListener("keyup", zipMask);
+        element.addEventListener("change", zipMask);
+    }
+    else {
+        console.log("No mask needed.");
+    }
 }
 
 // Add listeners to toggle checkboxes
