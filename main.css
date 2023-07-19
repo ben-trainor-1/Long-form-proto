@@ -145,35 +145,6 @@ input {
     vertical-align: top !important;
 }
 
-/* Validation */
-input:has(+ .just-validate-error-label), input:focus:has(+ .just-validate-error-label) {
-    border: 1px solid rgb(235, 55, 55);
-}
-input:focus:has(+ .just-validate-error-label) {
-    box-shadow: 0 0 0 .25rem rgba(235, 55, 55, .25);
-}
-.just-validate-error-label {
-    margin: 0px;
-    text-align: center;
-    padding: 0px;
-    font-style: italic;
-    font-size: .85rem;
-    font-weight: 600;
-    /* background-color: rgb(228, 54, 54); */
-    color: rgb(235, 55, 55) !important;
-}
-.just-validate-error-field, .just-validate-error-field:focus, .just-validate-error-field:focus-visible,
-.just-validate-error-field, .just-validate-error-field:focus, .just-validate-error-field:focus-visible {
-    border: 1px solid rgb(235, 55, 55);
-    background-color: rgb(255, 241, 241) !important;
-    color: rgb(200, 39, 39);
-}
-
-.just-validate-success-field:focus, .just-validate-success-field:focus-visible {
-    border: 1px solid green;
-    color: rgb(0, 106, 0);
-}
-
 #save_button {
     transition: .3s;
 }
@@ -246,9 +217,4 @@ label, .material-icons, .search-icon, select {
 /* Other colors */
 .bg-insight-primary {
     background-color: rgb(167, 77, 77);
-}
-
-/* Purely for intellisense */
-.hidden-section {
-    text-decoration: inherit;
 }
