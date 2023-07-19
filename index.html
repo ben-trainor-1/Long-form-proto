@@ -10,13 +10,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
         rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="validator.css">
+    <script src="validator.js"></script>
     
 </head>
 
 <body class="row bg-dark m-0 p-0">
 
     
-<form id="building_form" action="index.html" class="row col-12 m-0 p-0">
+<form id="save_button_container" action="index.html" class="row col-12 m-0 p-0">
         
         <div id="building_form_dropdowns" class="row m-0 p-0 py-2 px-lg-0 px-2 bg-insight-primary position-sticky sticky-top shadow">
 
@@ -32,7 +34,8 @@
                 <!-- Save changes button -->
                 <div class="row col-xxl-1 d-xxl-flex d-none m-0 p-0"></div>
                 <div class="row col-xxl-2 col-4 m-0 p-0">
-                    <button id="save_button" class="btn btn-light text-dark border-0 fw-bold" type="submit" disabled>No changes</button>
+                    <input id="save_button" type="button" class="btn btn-light text-dark border-0 fw-bold" onclick="trySubmitForm(event)" disabled>No changes</button>
+                    <input id="save_button_invisButton" type="submit" class="visually-hidden"></button>
                 </div>
                 <div class="row col-xxl-1 d-xxl-flex d-none m-0 p-0"></div>
                 
@@ -204,15 +207,15 @@
                 <div id="container_transactionType" class="col-md-4 col-6 m-0 p-2 text-start radio-section">
                     <label class="fw-bold m-0 p-0">Transaction type</label>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="rdo_cash" type="radio" class="form-check-input radio_transactionType" checked>
+                        <input name="container_transactionType" id="rdo_cash" type="radio" class="form-check-input radio_transactionType" checked>
                         <label for="rdo_cash" class="form-check-label">Cash</label>
                     </div>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="rdo_rto" type="radio" class="form-check-input radio_transactionType">
+                        <input name="container_transactionType" id="rdo_rto" type="radio" class="form-check-input radio_transactionType">
                         <label for="rdo_rto" class="form-check-label">RTO</label>
                     </div>
                     <div class="form-check">
-                        <input required name="container_transactionType" id="rdo_stock" type="radio" class="form-check-input radio_transactionType">
+                        <input name="container_transactionType" id="rdo_stock" type="radio" class="form-check-input radio_transactionType">
                         <label for="rdo_stock" class="form-check-label">Stock</label>
                     </div>
                 </div>
@@ -221,11 +224,11 @@
                 <div id="container_orderType" class="col-md-4 col-6 m-0 p-2 text-start radio-section">
                     <label class="fw-bold m-0 p-0">Order Type</label>
                     <div class="form-check">
-                        <input required name="container_orderType" id="rdo_normal" type="radio" class="form-check-input" checked>
+                        <input name="container_orderType" id="rdo_normal" type="radio" class="form-check-input" checked>
                         <label for="rdo_normal" class="form-check-label">Normal order</label>
                     </div>
                     <div class="form-check">
-                        <input required name="container_orderType" id="rdo_special" type="radio" class="form-check-input">
+                        <input name="container_orderType" id="rdo_special" type="radio" class="form-check-input">
                         <label for="rdo_special" class="form-check-label">Special order</label>
                     </div>
                 </div>
@@ -234,7 +237,7 @@
                 <div class="col-md-4 col-6 m-0 p-2 text-start">
                     <div class="row m-0 p-0 mb-1">
                         <label for="txt_inventoryDate" class="form-label fw-bold m-0 p-0">Inventory date</label>
-                        <input required id="txt_inventoryDate" type="date" class="form-control m-0 px-2 py-1">
+                        <input id="txt_inventoryDate" type="date" class="form-control m-0 px-2 py-1">
                     </div>
                     <div class="row m-0 p-0">
                         <label for="txt_saleDate" class="form-label fw-bold m-0 p-0">Sale date</label>
@@ -272,7 +275,7 @@
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
                             <label for="ddl_manufacturer" class="row form-label fw-bold m-0 p-0">Manufacturer</label>
-                            <select required id="ddl_manufacturer" class="form-select m-0 p-0 px-2 py-1">
+                            <select id="ddl_manufacturer" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -281,7 +284,7 @@
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
                             <label for="ddl_dealerName" class="row form-label fw-bold m-0 p-0">Dealer name</label>
-                            <select required id="ddl_dealerName" class="form-select m-0 p-0 px-2 py-1">
+                            <select id="ddl_dealerName" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -293,7 +296,7 @@
                     <div class="row m-0 p-0 mb-3">
                         <div class="col-6 m-0 p-0 pe-3">
                             <label for="ddl_lot" class="row form-label fw-bold m-0 p-0">Lot</label>
-                            <select required id="ddl_lot" class="form-select m-0 p-0 px-2 py-1">
+                            <select id="ddl_lot" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -302,7 +305,7 @@
                         </div>
                         <div class="col-6 m-0 p-0 ps-3">
                             <label for="ddl_salesPerson" class="row form-label fw-bold m-0 p-0">Sales person</label>
-                            <select required id="ddl_salesPerson" class="form-select m-0 p-0 px-2 py-1">
+                            <select id="ddl_salesPerson" class="form-select m-0 p-0 px-2 py-1">
                                 <option value="-1" selected>None</option>
                                 <option value="1"></option>
                                 <option value="2"></option>
@@ -579,7 +582,7 @@
 
                 <div class="row m-0 p-0 mb-3 justify-content-center">
                     <label for="ddl_referral" class="row fw-bold m-0 p-0">referral</label>
-                    <select id="ddl_referral" class="form-select m-0 px-2 py-1" required>
+                    <select id="ddl_referral" class="form-select m-0 px-2 py-1">
                         <option value="-1" disabled selected>None</option>
                         <option value="1"></option>
                         <option value="2"></option>
@@ -589,7 +592,7 @@
 
                 <div class="row m-0 p-0 justify-content-center">
                     <label for="txt_description" class="row fw-bold m-0 p-0">description</label>
-                    <textarea id="txt_description" class="form-control m-0 px-2 py-1" rows="4" required></textarea>
+                    <textarea id="txt_description" class="form-control m-0 px-2 py-1" rows="4"></textarea>
                 </div>
                 
             </div>
@@ -705,13 +708,13 @@
                     <!-- Different mailing address check -->
                     <div class="m-0 p-2 px-3 bg-dark text-light rounded">
                         <div class="form-check">
-                            <input id="cbx_customerAlternateAddress" type="checkbox" class="form-check-input hidden-section">
+                            <input id="cbx_customerAlternateAddress" type="checkbox" class="form-check-input check-toggler">
                             <label for="cbx_customerAlternateAddress" class="form-check-label">customerDifferentMailing</label>
                         </div>
                     </div>
 
                     <!-- Alternate mailing address -->
-                    <div id="container_cbx_customerAlternateAddress" class="row col-12 m-0 mt-3 p-0 visually-hidden">
+                    <div id="cbx_customerAlternateAddress_container" class="row col-12 m-0 mt-3 p-0 visually-hidden">
 
                         <div class="row col-12 fw-bold fs-5 m-0 mb-3 p-0"><span class="text-center m-0 p-2 text-bg-warning rounded">Alternate address</span></div>
                     
@@ -774,13 +777,13 @@
                 <!-- Additional customer -->
                 <div class="row m-0 p-2 px-3 bg-dark text-light rounded">
                     <div class="form-check">
-                        <input id="cbx_additionalCustomer" type="checkbox" class="form-check-input hidden-section">
+                        <input id="cbx_additionalCustomer" type="checkbox" class="form-check-input check-toggler">
                         <label for="cbx_additionalCustomer" class="form-check-label">additionalCustomer</label>
                     </div>
                 </div>
 
                 <!-- SECONDARY CUSTOMER -->
-                <div id="container_cbx_additionalCustomer" class="row col-12 m-0 p-0 visually-hidden">
+                <div id="cbx_additionalCustomer_container" class="row col-12 m-0 p-0 visually-hidden">
                     
                     <!-- Header -->
                     <div class="row col-12 fw-bold fs-5 m-0 my-3 p-0"><span class="text-center m-0 p-0">Secondary customer</span></div>
@@ -878,13 +881,13 @@
                     <!-- Different mailing address -->
                     <div class="m-0 p-2 px-3 bg-dark text-light rounded">
                         <div class="form-check">
-                            <input id="cbx_secondaryDifferentAddress" type="checkbox" class="form-check-input hidden-section">
+                            <input id="cbx_secondaryDifferentAddress" type="checkbox" class="form-check-input check-toggler">
                             <label for="cbx_secondaryDifferentAddress" class="form-check-label">secondaryDifferentAddress</label>
                         </div>
                     </div>
 
                     <!-- Alternate address -->
-                    <div id="container_cbx_secondaryDifferentAddress" class="row col-12 m-0 mt-3 p-0 visually-hidden">
+                    <div id="cbx_secondaryDifferentAddress_container" class="row col-12 m-0 mt-3 p-0 visually-hidden">
                         <div class="row col-12 fw-bold fs-5 m-0 mb-3 p-0"><span class="text-center m-0 p-2 text-bg-warning rounded">Alternate address</span></div>
                     
                         <!-- ADDRESS -->
@@ -1006,12 +1009,12 @@
                 <!-- Secondary reference option -->
                 <div class="row m-0 p-2 px-3 bg-dark text-light rounded">
                     <div class="form-check">
-                        <input id="cbx_secondaryReference" type="checkbox" class="form-check-input hidden-section">
+                        <input id="cbx_secondaryReference" type="checkbox" class="form-check-input check-toggler">
                         <label for="cbx_secondaryReference" class="form-check-label">secondaryReference</label>
                     </div>
                 </div>
 
-                <div id="container_cbx_secondaryReference" class="row col-12 m-0 mt-3 p-0 visually-hidden">
+                <div id="cbx_secondaryReference_container" class="row col-12 m-0 mt-3 p-0 visually-hidden">
                     <div class="row col-12 fw-bold fs-5 m-0 mb-3 p-0"><span class="text-center m-0 p-0">Secondary reference</span></div>
 
                     <!-- Reference name -->
@@ -1237,7 +1240,7 @@
                                 <td class="text-start m-0 p-1 ps-0">
                                     <table class="table-borderless"><tr>
                                         <td><span class="fw-bold text-start px-2">$</span></td>
-                                        <td class="w-100"><input id="txt_cash_basePrice" type="text" class="manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
+                                        <td class="w-100"><input id="txt_cash_basePrice" type="text" class="check-valid-input check-dollarAmt manual-price-toggle form-control m-0 p-1 px-2 bg-warning-light text-end"></td>
                                     </tr></table>
                                 </td>
                                 <td id="auto_txt_cash_basePrice" class="fst-italic border-start text-center fs-7">[Manual]</td>
@@ -1919,869 +1922,10 @@
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
+    <script type="module" src="buildingform.js"></script>
 
 
-
-    <script type="text/javascript" async>
-
-
-        // Just-validate library stuff
-        const validator = new JustValidate('#building_form');
-        // For some reason, you have to tell the validator to actually submit the form when it's successfully validated
-        validator.onSuccess(event => {
-            // console.log("Submitting form");
-            document.getElementById("building_form").submit();
-        });
-        // Grab every single field on the page
-        const allInputs = document.querySelectorAll("input, select, textarea");
-
-        // Need to make lists of IDs to check against when adding validation to calculations table
-        const calculationSectionInputs = document.querySelectorAll("#calculations input").values();
-        const priceIds = [];
-        const taxIds = [];
-        let currentInput = calculationSectionInputs.next();
-        while (currentInput.value != undefined) {
-            if (currentInput.value.id.toLowerCase().includes("tax") && currentInput.value.id.toLowerCase().includes("rate")) {
-                taxIds.push(currentInput.value.id);
-            }
-            else if (currentInput.value.type != "checkbox") {
-                priceIds.push(currentInput.value.id);
-            }
-            currentInput = calculationSectionInputs.next();
-        }
-
-        addValidation(allInputs);
-
-        // Made it a function in case of a need to re-validate the whole page
-        // Must be passed a querySelectorAll() set of inputs to check
-        function addValidation(querySelect) {
-
-            for (let i = 0; i < querySelect.length; i++) {
-                
-                // console.log("Processing " + querySelect.item(i).id + "...");
-        
-                // Email fields (id must contain "email")
-                if (querySelect.item(i).id.toLowerCase().includes("email")) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter an email',
-                            },
-                            {
-                                rule: 'email', 
-                                errorMessage: 'Incorrect format',
-                            },
-                        ]);                    
-                    }
-                    // If field is not required
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {rule: 'email', errorMessage: 'Incorrect format',},
-                        ]);
-                    }
-                }
-
-                // Social security number fields (id must contain "SSN")
-                else if (querySelect.item(i).id.toLowerCase().includes("ssn")) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a SSN',
-                            },
-                            {
-                                rule: 'customRegexp', 
-                                value: /^[0-9]{4}$/,
-                                errorMessage: 'Last 4 digits only',
-                            },
-                        ]);
-                    }
-                    // If field is not required
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp', 
-                                value: /^[0-9]{4}$/,
-                                errorMessage: 'Last 4 digits only',
-                            },
-                        ]);
-                    }
-                }
-
-                // Phone number fields (id must contain "phone")
-                else if (querySelect.item(i).type == "tel") {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a phone number',
-                            },
-                            {
-                                rule: 'customRegexp', 
-                                value: /^[/(][0-9]{3}[/)][ ][0-9]{3}[-][0-9]{4}$/,
-                                errorMessage: 'Incorrect format',
-                            },
-                        ]);
-                    }
-                    // If field is not required
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp', 
-                                value: /^[/(][0-9]{3}[/)][ ][0-9]{3}[-][0-9]{4}$/,
-                                errorMessage: 'Incorrect format',
-                            },
-                        ]);
-                    }
-                }
-
-                // Prevent select fields from having "None" selected only if required
-                else if (querySelect.item(i).tagName == "SELECT" && querySelect.item(i).required) {
-                    // console.log("Adding select " + querySelect.item(i).id + " to validator");
-                    validator.addField('#' + querySelect.item(i).id, [
-                        {
-                            rule: 'minNumber',
-                            value: 0,
-                            errorMessage: 'Please select an option',
-                        },
-                    ]);
-                }
-
-                // Date fields (already formatted by date input type)
-                else if (querySelect.item(i).type == "date" && querySelect.item(i).required) {
-                    validator.addField('#' + querySelect.item(i).id, [
-                        {
-                            rule: 'required', 
-                            errorMessage: 'Please enter a date',
-                        },
-                    ]);
-                }
-
-                // State abbreviations
-                else if (querySelect.item(i).id.toLowerCase().includes("state")) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a state',
-                            },
-                            {
-                                rule: 'customRegexp',
-                                value: /^(A[KLRZ])|(C[AOT])|(D[CE])|(FL)|(GA)|(HI)|(I[ADLN])|(K[SY])|(LA)|(M[ADEINOST])|(N[CDEHJMVY])|(O[HKR])|(P[AR])|(RI)|(S[CD])|(T[NX])|(UT)|(V[AIT])|(W[AIVY])$/,
-                                errorMessage: 'Enter a valid state code',
-                            },
-                            {
-                                rule: 'maxLength',
-                                value: 2,
-                                errorMessage: 'Enter a 2-letter state code',
-                            },
-                        ]);
-                    }
-                    // If field is not required, only check the format
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp',
-                                value: /^(A[KLRZ])|(C[AOT])|(D[CE])|(FL)|(GA)|(HI)|(I[ADLN])|(K[SY])|(LA)|(M[ADEINOST])|(N[CDEHJMVY])|(O[HKR])|(P[AR])|(RI)|(S[CD])|(T[NX])|(UT)|(V[AIT])|(W[AIVY])$/,
-                                errorMessage: 'Enter a valid state code',
-                            },
-                            {
-                                rule: 'maxLength',
-                                value: 2,
-                                errorMessage: 'Enter a 2-letter state code',
-                            },
-                        ]);
-                    }
-                }
-
-                // Zip codes
-                else if (querySelect.item(i).id.toLowerCase().includes("zip")) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a zip code',
-                            },
-                            {
-                                rule: 'customRegexp',
-                                value: /^([0-9]{5})([-][0-9]{4})?$/,
-                                errorMessage: 'Enter a 5- or 9-digit zip',
-                            },
-                        ]);
-                    }
-                    // If field is not required, only check the format
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp',
-                                value: /^([0-9]{5})([-][0-9]{4})?$/,
-                                errorMessage: 'Enter a 5- or 9-digit zip',
-                            },
-                        ]);
-                    }
-                }
-
-                // Prices elsewhere
-                else if (querySelect.item(i).id.toLowerCase().includes("cost")) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a dollar amount',
-                            },
-                            {
-                                rule: 'customRegexp',
-                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
-                                errorMessage: 'Enter a valid dollar amount',
-                            },
-                        ]);
-                    }
-                    // If field is not required, only check the format
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp',
-                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
-                                errorMessage: 'Enter a valid dollar amount',
-                            },
-                        ]);
-                    }                    
-                }
-
-                // Tax inputs in calculations table
-                // I wrote this regular expression https://regex101.com/r/9BLNOW/1
-                else if (taxIds.includes(querySelect.item(i).id)) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a tax rate',
-                            },
-                            {
-                                rule: 'customRegexp',
-                                value: /(^[0]?[.]{1}[0-9]{0,10}[1-9]{1}$)|(^[1-9]{1}[0-9]{0,2}([.]{1}[0-9]{0,10}[1-9]{1})?$)/g,
-                                errorMessage: 'Enter a valid tax rate',
-                            },
-                        ]);
-                    }
-                    // If field is not required, only check the format
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp',
-                                value: /(^[0]?[.]{1}[0-9]{0,10}[1-9]{1}$)|(^[1-9]{1}[0-9]{0,2}([.]{1}[0-9]{0,10}[1-9]{1})?$)/g,
-                                errorMessage: 'Enter a valid tax rate',
-                            },
-                        ]);
-                    }                    
-                }
-
-                // Tax inputs in calculations table
-                else if (priceIds.includes(querySelect.item(i).id)) {
-                    // If field is required
-                    if (querySelect.item(i).required) {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'required', 
-                                errorMessage: 'Please enter a dollar amount',
-                            },
-                            {
-                                rule: 'customRegexp',
-                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
-                                errorMessage: 'Enter a valid dollar amount',
-                            },
-                        ]);
-                    }
-                    // If field is not required, only check the format
-                    else {
-                        validator.addField('#' + querySelect.item(i).id, [
-                            {
-                                rule: 'customRegexp',
-                                value: /^([1-9]{1}[0-9]{0,})?[0]?([.][0-9]{2})?$/,
-                                errorMessage: 'Enter a valid dollar amount',
-                            },
-                        ]);
-                    }
-                }
-
-                // All other required fields that don't need other forms of validation
-                // (otherwise they won't get seen by the validator)
-                else if (querySelect.item(i).required) {
-                    validator.addField('#' + querySelect.item(i).id, [
-                        {rule: 'required', errorMessage: 'Please enter a value',},
-                    ]);
-                }
-
-            }
-            
-            addAutoValidateListener();
-            
-        }
-
-
-        // For removing validation from a set of fields
-        // Must be passed a querySelectAll() set of inputs
-        // You might think this needs to remove event listeners, but it doesn't as a result of JS being semi-smart
-        // and not adding more listeners where the named function is already attached to a listener on the element 
-        function removeValidation(querySelect) {
-            for (let i = 0; i < querySelect.length; i++) {
-                if (validator.fieldIds.has("#" + querySelect.item(i).id)) {
-                    // console.log("Validator contains field " + querySelect.item(i).id + ". Removing...");
-                    validator.removeField("#" + querySelect.item(i).id);
-                }
-            }
-        }
-        
-        // Add automatic validation listening
-        function addAutoValidateListener() {
-            const mapIter = validator.fieldIds.keys();
-            var currentFieldId;
-            for (let i = 0; i < validator.fieldIds.size; i++) {
-                currentFieldId = mapIter.next().value;
-                document.querySelector(currentFieldId).addEventListener("keyup", autoValidateListener);
-            }
-        }
-        
-        // Auto validate input when typing
-        function autoValidateListener(event) {
-            if (event.key != "Tab") validator.revalidateField("#" + this.id);
-        }
-
-
-        // AUTOFORMAT STUFF
-        // Autoformat phone numbers (Sam edited a codepen)
-        function phoneMask() { 
-            var num = $(this).val().replace(/\D/g,''); 
-            if (num.length < 4) {
-                $(this).val(num.substring(0,num.length));
-            }
-            else if (num.length < 7) {
-                $(this).val('(' + num.substring(0,3) + ') ' + num.substring(3,6));
-            }
-            else {
-                $(this).val('(' + num.substring(0,3) + ') ' + num.substring(3,6) + '-' + num.substring(6,10)); 
-            }
-            validator.revalidateField("#" + this.id.toString());
-        }
-        $('[type="tel"]').keyup(phoneMask);
-
-        // Autoformat zip codes
-        function zipMask() { 
-            var num = $(this).val().replace(/\D/g,'');
-            if (num.length < 6) {
-                $(this).val(num.substring(0, num.length));
-            }
-            else {
-                $(this).val(num.substring(0,5) + "-" + num.substring(5,9)); 
-            }
-            validator.revalidateField("#" + this.id.toString());
-        }
-        $('*[id*=Zip]').keyup(zipMask);
-
-        // Autoformat SSN (last 4 digits)
-        function ssnMask() { 
-            var num = $(this).val().replace(/\D/g,'');
-            $(this).val(num.substring(0, 4));
-            validator.revalidateField("#" + this.id.toString());
-        }
-        $('*[id*=SSN]').keyup(ssnMask);
-
-
-        // Dropdown menu
-        document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseover", showDropdown);
-        document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseout", hideDropdown);
-        document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("click", showDropdown);
-        document.getElementsByClassName("dropdown-menu").item(0).addEventListener("mouseout", hideDropdown);
-        const dropdown = new bootstrap.Dropdown(document.getElementsByClassName("dropdown-menu").item(0));
-
-        function showDropdown() {
-            if (!document.getElementById("dropdown_button").classList.contains("show")) {
-                document.getElementById("dropdown_button").click();
-            }
-        }
-        function hideDropdown() {
-            setTimeout(() => {
-                if (document.querySelector(".dropdown-toggle:hover") == null 
-                    && document.querySelector(".dropdown-menu:hover") == null 
-                    && document.getElementById("dropdown_button").classList.contains("show")) {
-                    document.getElementById("dropdown_button").click();
-                }
-            }, 100);
-        }
-        
-
-        // Manual address entry toggle
-        // Reference: txt_Category + _ + cbx_id
-        const manualAddressChecks = document.getElementsByClassName("manual-address ignore-field");
-        for (var i = 0; i < manualAddressChecks.length; i++) {
-            manualAddressChecks.item(i).addEventListener("click", manualAddressClick);
-        }
-        function manualAddressClick() {
-            if (this.checked == true) {
-                document.getElementById("txt_SearchAddress" + "_" + this.id).disabled = true;
-                document.getElementById("txt_StreetAddress" + "_" + this.id).disabled = false;
-                document.getElementById("txt_City" + "_" + this.id).disabled = false;
-                document.getElementById("txt_State" + "_" + this.id).disabled = false;
-                document.getElementById("txt_Zip" + "_" + this.id).disabled = false;
-                document.getElementById("txt_County" + "_" + this.id).disabled = false;
-            }
-            else {
-                document.getElementById("txt_SearchAddress" + "_" + this.id).disabled = false;
-                document.getElementById("txt_StreetAddress" + "_" + this.id).disabled = true;
-                document.getElementById("txt_City" + "_" + this.id).disabled = true;
-                document.getElementById("txt_State" + "_" + this.id).disabled = true;
-                document.getElementById("txt_Zip" + "_" + this.id).disabled = true;
-                document.getElementById("txt_County" + "_" + this.id).disabled = true;
-            }
-        }
-        
-
-        // Location same as customer
-        // Disables location data entry and auto-updates fields based on customer address while being entered
-        const locationSameAsCustomerCheck = document.getElementById("cbx_locationSameAsCustomer");
-        locationSameAsCustomerCheck.addEventListener("click", locationSameAsCustomerClick);
-        document.getElementById("txt_SearchAddress_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        document.getElementById("txt_StreetAddress_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        document.getElementById("txt_City_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        document.getElementById("txt_State_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        document.getElementById("txt_Zip_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        document.getElementById("txt_County_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
-        
-        function locationSameAsCustomerClick() {
-            if (locationSameAsCustomerCheck.checked == true) {
-                
-                // Enable first so they can be programmatically clicked
-                document.getElementById("txt_SearchAddress_cbx_building").disabled = false;
-                document.getElementById("txt_StreetAddress_cbx_building").disabled = false;
-                document.getElementById("txt_City_cbx_building").disabled = false;
-                document.getElementById("cbx_building").disabled = false;
-                document.getElementById("txt_State_cbx_building").disabled = false;
-                document.getElementById("txt_Zip_cbx_building").disabled = false;
-                document.getElementById("txt_County_cbx_building").disabled = false;
-                
-                // Change values to match
-                document.getElementById("txt_StreetAddress_cbx_building").value = document.getElementById("txt_StreetAddress_cbx_customer").value;
-                document.getElementById("txt_City_cbx_building").value = document.getElementById("txt_City_cbx_customer").value;
-                document.getElementById("txt_State_cbx_building").value = document.getElementById("txt_State_cbx_customer").value;
-                document.getElementById("txt_Zip_cbx_building").value = document.getElementById("txt_Zip_cbx_customer").value;
-                document.getElementById("txt_County_cbx_building").value = document.getElementById("txt_County_cbx_customer").value;
-
-                // Click to trigger checkIfModified function so that they highlight if changed
-                document.getElementById("txt_StreetAddress_cbx_building").click();
-                document.getElementById("txt_City_cbx_building").click();
-                document.getElementById("txt_State_cbx_building").click();
-                document.getElementById("txt_Zip_cbx_building").click();
-                document.getElementById("txt_County_cbx_building").click();
-                
-                // Then disable again finally
-                document.getElementById("txt_SearchAddress_cbx_building").disabled = true;
-                document.getElementById("txt_StreetAddress_cbx_building").disabled = true;
-                document.getElementById("txt_City_cbx_building").disabled = true;
-                document.getElementById("cbx_building").disabled = true;
-                document.getElementById("txt_State_cbx_building").disabled = true;
-                document.getElementById("txt_Zip_cbx_building").disabled = true;
-                document.getElementById("txt_County_cbx_building").disabled = true;
-            }
-            else {
-                manualAddressClickPassVar("cbx_building");
-                document.getElementById("cbx_building").disabled = false;
-            }
-        }
-
-        // Manual address entry with different ID pass
-        function manualAddressClickPassVar(id) {
-            if (document.getElementById(id).checked == true) {
-                document.getElementById("txt_SearchAddress" + "_" + id).disabled = true;
-                document.getElementById("txt_StreetAddress" + "_" + id).disabled = false;
-                document.getElementById("txt_City" + "_" + id).disabled = false;
-                document.getElementById("txt_State" + "_" + id).disabled = false;
-                document.getElementById("txt_Zip" + "_" + id).disabled = false;
-                document.getElementById("txt_County" + "_" + id).disabled = false;
-            }
-            else {
-                document.getElementById("txt_SearchAddress" + "_" + id).disabled = false;
-                document.getElementById("txt_StreetAddress" + "_" + id).disabled = true;
-                document.getElementById("txt_City" + "_" + id).disabled = true;
-                document.getElementById("txt_State" + "_" + id).disabled = true;
-                document.getElementById("txt_Zip" + "_" + id).disabled = true;
-                document.getElementById("txt_County" + "_" + id).disabled = true;
-            }
-        }
-
-
-        // Show/hide correct transaction types and tables
-        // Also remove validation from hidden calculation tables if the transaction type changes
-        // (so that the form will actually submit)
-        const transactionTypeRadios = document.getElementsByClassName("radio_transactionType");
-        const landlordInformationInputs = document.getElementById("landlord_information").getElementsByTagName("input");
-        for (var i = 0; i < transactionTypeRadios.length; i++) {
-            transactionTypeRadios.item(i).addEventListener("click", transactionTypeClick);
-        }
-        transactionTypeClick();
-        function transactionTypeClick() {
-            document.getElementById("noTransactionType").classList.add("visually-hidden");
-            // CASH
-            if (document.getElementById("rdo_cash").checked == true) {
-                if (document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_cash").classList.remove("visually-hidden");
-                    addValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
-                }
-                if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_rto").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
-                }
-                if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_stock").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
-                }
-                if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("landlord_information").classList.add("visually-hidden");
-                }
-                if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("nav_landlord_information").classList.add("visually-hidden");
-                    removeValidation(document.querySelectorAll("#landlord_information input"));
-                }
-                for (var i = 0; i < landlordInformationInputs.length; i++) {
-                    landlordInformationInputs.item(i).disabled = true;
-                }
-                if (document.getElementById("taxExempt").classList.contains("visually-hidden")) {
-                    document.getElementById("taxExempt").classList.remove("visually-hidden");
-                }
-            }
-            // RTO
-            else if (document.getElementById("rdo_rto").checked == true) {
-                if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_cash").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
-                }
-                if (document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_rto").classList.remove("visually-hidden");
-                    addValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
-                }
-                if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_stock").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
-                }
-                if (document.getElementById("landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("landlord_information").classList.remove("visually-hidden");
-                    addValidation(document.querySelectorAll("#landlord_information input"));
-                }
-                if (document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("nav_landlord_information").classList.remove("visually-hidden");
-                }
-                for (var i = 0; i < landlordInformationInputs.length; i++) {
-                    landlordInformationInputs.item(i).disabled = false;
-                }
-                if (document.getElementById("taxExempt").classList.contains("visually-hidden")) {
-                    document.getElementById("taxExempt").classList.remove("visually-hidden");
-                }
-            }
-            // STOCK
-            else if (document.getElementById("rdo_stock").checked == true) {
-                if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_cash").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
-                }
-                if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_rto").classList.add("visually-hidden");
-                    removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
-                }
-                if (document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
-                    document.getElementById("calculation_stock").classList.remove("visually-hidden");
-                    addValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
-                }
-                if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("landlord_information").classList.add("visually-hidden");
-                }
-                if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
-                    document.getElementById("nav_landlord_information").classList.add("visually-hidden");
-                    removeValidation(document.querySelectorAll("#landlord_information input"));
-                }
-                for (var i = 0; i < landlordInformationInputs.length; i++) {
-                    landlordInformationInputs.item(i).disabled = true;
-                }
-                if (!document.getElementById("taxExempt").classList.contains("visually-hidden")) {
-                    document.getElementById("taxExempt").classList.add("visually-hidden");
-                }
-            }
-        }
-
-
-        // Manual pricing in calculations table
-        // Enable/disable fields, update automatic/manual appropriately
-        const manualPricingCheck = document.getElementById("cbx_pricingManual");
-        manualPricingCheck.addEventListener("click", manualPricingClick);
-        var manualPrices = document.getElementsByClassName("manual-price-toggle");
-        manualPricingClick();
-        function manualPricingClick() {
-            if (this.checked == true) {
-                for (var i = 0; i < manualPrices.length; i++) {
-                    manualPrices.item(i).disabled = false;
-                    document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Manual]";
-                }
-            }
-            else {
-                for (var i = 0; i < manualPrices.length; i++) {
-                    manualPrices.item(i).disabled = true;
-                    document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Automatic]";
-                }
-            }
-        }
-
-
-        // SHOW/HIDE SECTIONS
-        const hiddenSections = document.getElementsByClassName("hidden-section");
-        for (let i = 0; i < hiddenSections.length; i++) {
-            hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
-        }
-        showHideAllSections();
-
-        // Dynamically show/hide sections that have values in them on page load/refresh
-        // Reference: cbx_box, container_cbx_box
-        function showHideAllSections() {
-            for (let i = 0; i < hiddenSections.length; i++) {                
-                let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
-                let currentField = currentValues.next();
-                while (currentField.value != undefined) {
-                    if (currentField.value.value != '' && currentField.value.type != "checkbox") {
-                        hiddenSections.item(i).checked = true;
-                        document.getElementById("container_" + hiddenSections.item(i).id).classList.remove("visually-hidden");
-                        break;
-                    }
-                    else {
-                        currentField = currentValues.next();
-                    }
-                }
-            }
-        }
-
-
-        // CHANGE TRACKING
-        const initialValuesCol1 = [];
-        const initialValuesCol2 = [];
-        var editHistory = [];
-
-        // Save initial values and add events
-        for (let i = 0; i < allInputs.length; i++) {
-
-            // Don't include ignored fields
-            if (!allInputs.item(i).classList.contains("ignore-field")) {                
-                if (allInputs.item(i).type == "checkbox" || allInputs.item(i).type == "radio") {
-                    allInputs.item(i).addEventListener("click", (event) => checkIfModified(event));
-                    initialValuesCol2.push(allInputs.item(i).checked);
-                }
-                else if (allInputs.item(i).type == "date") {
-                    allInputs.item(i).addEventListener("change", (event) => checkIfModified(event));
-                    allInputs.item(i).addEventListener("keyup", (event) => checkIfModified(event));
-                    initialValuesCol2.push(allInputs.item(i).value);
-                }
-                else {
-                    allInputs.item(i).addEventListener("keyup", (event) => checkIfModified(event));
-                    allInputs.item(i).addEventListener("change", (event) => checkIfModified(event));
-                    allInputs.item(i).addEventListener("click", (event) => checkIfModified(event));
-                    initialValuesCol2.push(allInputs.item(i).value);
-                }
-                initialValuesCol1.push(allInputs.item(i).id);
-            }
-
-        }
-        
-        // Show/hide sections of corresponding container to a checkbox
-        function showHideSectionsClick() {
-
-            // Show/hide corresponding sections
-            if (this.checked == true) {
-                if (document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
-                    document.getElementById("container_" + this.id).classList.remove("visually-hidden");
-                }
-            }
-            else {
-                if (!document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
-                    document.getElementById("container_" + this.id).classList.add("visually-hidden");
-                }
-            }
-
-            // Add required tags to elements
-            var fieldsContainer = document.getElementById("container_" + this.id);
-            
-            // Make sure there are any required fields inside of shown/hidden container
-            if (fieldsContainer.getElementsByClassName("required-toggle").item(0) != null) {
-
-                var requiredFields = document.getElementsByClassName("required-toggle");
-
-                // When container is open, require all corresponding fields
-                if (this.checked) {
-                    for (let i = 0; i < requiredFields.length; i++) {
-                        requiredFields.item(i).required = true;
-                    }
-                }
-                // When container is closed, remove requirement for all corresponding fields
-                else {
-                    for (let i = 0; i < requiredFields.length; i++) {
-                        requiredFields.item(i).required = false;
-                    }
-                }
-            }
-
-            // Remove changes from edit history when field is closed
-            // No save necessary since fields will be cleared if form is exited or save is pressed elsewhere
-            let fields = fieldsContainer.getElementsByTagName("input");
-            // Check if there are any fields to track changes of
-            if (fields.item(0) != null) {
-                // When section is shown add fields to edit history tracking
-                // and fields to validator
-                if (this.checked) {
-                    addValidation(fieldsContainer.querySelectorAll("input"));
-                    for (let i = 0; i < fields.length; i++) {                        
-                        if (fields.item(i).type != "checkbox") {
-                            if (fields.item(i).disabled) {
-                                fields.item(i).disabled = false;
-                                fields.item(i).click();
-                                fields.item(i).disabled = true;
-                            }
-                            else {
-                                fields.item(i).click();
-                            }
-                        }
-                        
-                    }
-                }
-                // When section is hidden, remove inputs in this section from the edit history
-                // and remove validation fields from validator
-                else {
-                    removeValidation(fieldsContainer.querySelectorAll("input"));
-
-                    for (let i = 0; i < fields.length; i++) {
-                        if (editHistory.includes(fields.item(i).id)) {
-                            editHistory.splice(editHistory.indexOf(fields.item(i).id), 1);
-                        }
-                    }
-                    checkEditHistory();
-                }
-            }
-
-
-        }
-
-        // Listener function
-        var proceed;
-        function checkIfModified(event) {
-
-            // console.log(event.target);
-            // console.log(event.target.id);
-            // console.log(event.type);
-            proceed = false;
-
-            if (event.target.classList.contains("ignore-field")) {
-                proceed = false;
-            }
-            else if (event.type == "keyup") {
-                // Have to ignore Tab keyups for some weird situations
-                if (event.code == "Tab") {
-                    proceed = false;
-                }
-                else {
-                    proceed = true;
-                }
-            }
-            else {
-                proceed = true;
-            }
-            
-            if (proceed) {
-
-                // Checkboxes are weird
-                if (event.target.type == "checkbox") {
-
-                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
-                        && !editHistory.includes(event.target.id)) {
-                        editHistory.push(event.target.id);
-                        event.target.classList.add("edited");
-                    }
-                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
-                        && editHistory.includes(event.target.id)) {
-                        // Do nothing
-                    }
-                    else if (editHistory.includes(event.target.id)) {
-                        editHistory.splice(editHistory.indexOf(event.target.id), 1);
-                        event.target.classList.remove("edited");
-                    }
-
-                }
-                // Radios are even weirder
-                else if (event.target.type == "radio") {
-
-                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
-                        && !editHistory.includes(event.target.name)) {
-                        editHistory.push(event.target.name);
-                        document.getElementById(event.target.name).classList.add("edited");
-                    }
-                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
-                        && editHistory.includes(event.target.name)) {
-                        // Do nothing
-                    }
-                    else if (editHistory.includes(event.target.name)) {
-                        editHistory.splice(editHistory.indexOf(event.target.name), 1);
-                        document.getElementById(event.target.name).classList.remove("edited");
-                    }
-
-                }
-                // Other elements are fine
-                else {
-
-                    if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value
-                        && !editHistory.includes(event.target.id)) {
-                        editHistory.push(event.target.id);
-                        event.target.classList.add("edited");
-                    }
-                    else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value 
-                        && editHistory.includes(event.target.id)) {
-                        // Do nothing
-                    }
-                    else if (editHistory.includes(event.target.id)) {
-                        editHistory.splice(editHistory.indexOf(event.target.id), 1);
-                        event.target.classList.remove("edited");
-                    }
-
-                }
-                checkEditHistory();
-            }
-        }
-
-        // Check if any edits are remaining
-        function checkEditHistory() {
-            // console.log(editHistory);
-            if (editHistory.length == 0) {
-                document.getElementById("save_button").disabled = true;
-                document.getElementById("save_button").innerHTML = "No changes";
-            }
-            else {
-                document.getElementById("save_button").disabled = false;
-                document.getElementById("save_button").innerHTML = "Save changes";
-            }
-        }
-        
-
-        // Save with ctrl + s
-        document.addEventListener("keydown", e => {
-            if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
-                // Prevent the Save dialog to open
-                e.preventDefault();
-                // Place your code here
-                document.getElementById("save_button").click();
-            }
-        });
-
-        
-    </script>
+    
 
 </body>
 

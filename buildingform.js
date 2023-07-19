@@ -1,0 +1,502 @@
+import "./validator.js";
+
+// Grab every single field on the page
+const allInputs = document.querySelectorAll("input, select, textarea");
+
+
+// Dropdown menu
+document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseover", showDropdown);
+document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("mouseout", hideDropdown);
+document.getElementsByClassName("dropdown-toggle").item(0).addEventListener("click", showDropdown);
+document.getElementsByClassName("dropdown-menu").item(0).addEventListener("mouseout", hideDropdown);
+const dropdown = new bootstrap.Dropdown(document.getElementsByClassName("dropdown-menu").item(0));
+
+function showDropdown() {
+    if (!document.getElementById("dropdown_button").classList.contains("show")) {
+        document.getElementById("dropdown_button").click();
+    }
+}
+function hideDropdown() {
+    setTimeout(() => {
+        if (document.querySelector(".dropdown-toggle:hover") == null 
+            && document.querySelector(".dropdown-menu:hover") == null 
+            && document.getElementById("dropdown_button").classList.contains("show")) {
+            document.getElementById("dropdown_button").click();
+        }
+    }, 100);
+}
+
+
+// Manual address entry toggle
+// Reference: txt_Category + _ + cbx_id
+const manualAddressChecks = document.getElementsByClassName("manual-address ignore-field");
+for (var i = 0; i < manualAddressChecks.length; i++) {
+    manualAddressChecks.item(i).addEventListener("click", manualAddressClick);
+}
+function manualAddressClick() {
+    if (this.checked == true) {
+        document.getElementById("txt_SearchAddress" + "_" + this.id).disabled = true;
+        document.getElementById("txt_StreetAddress" + "_" + this.id).disabled = false;
+        document.getElementById("txt_City" + "_" + this.id).disabled = false;
+        document.getElementById("txt_State" + "_" + this.id).disabled = false;
+        document.getElementById("txt_Zip" + "_" + this.id).disabled = false;
+        document.getElementById("txt_County" + "_" + this.id).disabled = false;
+    }
+    else {
+        document.getElementById("txt_SearchAddress" + "_" + this.id).disabled = false;
+        document.getElementById("txt_StreetAddress" + "_" + this.id).disabled = true;
+        document.getElementById("txt_City" + "_" + this.id).disabled = true;
+        document.getElementById("txt_State" + "_" + this.id).disabled = true;
+        document.getElementById("txt_Zip" + "_" + this.id).disabled = true;
+        document.getElementById("txt_County" + "_" + this.id).disabled = true;
+    }
+}
+
+
+// Location same as customer
+// Disables location data entry and auto-updates fields based on customer address while being entered
+const locationSameAsCustomerCheck = document.getElementById("cbx_locationSameAsCustomer");
+locationSameAsCustomerCheck.addEventListener("click", locationSameAsCustomerClick);
+document.getElementById("txt_SearchAddress_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+document.getElementById("txt_StreetAddress_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+document.getElementById("txt_City_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+document.getElementById("txt_State_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+document.getElementById("txt_Zip_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+document.getElementById("txt_County_cbx_customer").addEventListener("keyup", locationSameAsCustomerClick);
+
+function locationSameAsCustomerClick() {
+    if (locationSameAsCustomerCheck.checked == true) {
+        
+        // Enable first so they can be programmatically clicked
+        document.getElementById("txt_SearchAddress_cbx_building").disabled = false;
+        document.getElementById("txt_StreetAddress_cbx_building").disabled = false;
+        document.getElementById("txt_City_cbx_building").disabled = false;
+        document.getElementById("cbx_building").disabled = false;
+        document.getElementById("txt_State_cbx_building").disabled = false;
+        document.getElementById("txt_Zip_cbx_building").disabled = false;
+        document.getElementById("txt_County_cbx_building").disabled = false;
+        
+        // Change values to match
+        document.getElementById("txt_StreetAddress_cbx_building").value = document.getElementById("txt_StreetAddress_cbx_customer").value;
+        document.getElementById("txt_City_cbx_building").value = document.getElementById("txt_City_cbx_customer").value;
+        document.getElementById("txt_State_cbx_building").value = document.getElementById("txt_State_cbx_customer").value;
+        document.getElementById("txt_Zip_cbx_building").value = document.getElementById("txt_Zip_cbx_customer").value;
+        document.getElementById("txt_County_cbx_building").value = document.getElementById("txt_County_cbx_customer").value;
+
+        // Click to trigger checkIfModified function so that they highlight if changed
+        document.getElementById("txt_StreetAddress_cbx_building").click();
+        document.getElementById("txt_City_cbx_building").click();
+        document.getElementById("txt_State_cbx_building").click();
+        document.getElementById("txt_Zip_cbx_building").click();
+        document.getElementById("txt_County_cbx_building").click();
+        
+        // Then disable again finally
+        document.getElementById("txt_SearchAddress_cbx_building").disabled = true;
+        document.getElementById("txt_StreetAddress_cbx_building").disabled = true;
+        document.getElementById("txt_City_cbx_building").disabled = true;
+        document.getElementById("cbx_building").disabled = true;
+        document.getElementById("txt_State_cbx_building").disabled = true;
+        document.getElementById("txt_Zip_cbx_building").disabled = true;
+        document.getElementById("txt_County_cbx_building").disabled = true;
+    }
+    else {
+        manualAddressClickPassVar("cbx_building");
+        document.getElementById("cbx_building").disabled = false;
+    }
+}
+
+// Manual address entry with different ID pass
+function manualAddressClickPassVar(id) {
+    if (document.getElementById(id).checked == true) {
+        document.getElementById("txt_SearchAddress" + "_" + id).disabled = true;
+        document.getElementById("txt_StreetAddress" + "_" + id).disabled = false;
+        document.getElementById("txt_City" + "_" + id).disabled = false;
+        document.getElementById("txt_State" + "_" + id).disabled = false;
+        document.getElementById("txt_Zip" + "_" + id).disabled = false;
+        document.getElementById("txt_County" + "_" + id).disabled = false;
+    }
+    else {
+        document.getElementById("txt_SearchAddress" + "_" + id).disabled = false;
+        document.getElementById("txt_StreetAddress" + "_" + id).disabled = true;
+        document.getElementById("txt_City" + "_" + id).disabled = true;
+        document.getElementById("txt_State" + "_" + id).disabled = true;
+        document.getElementById("txt_Zip" + "_" + id).disabled = true;
+        document.getElementById("txt_County" + "_" + id).disabled = true;
+    }
+}
+
+
+// Show/hide correct transaction types and tables
+// Also remove validation from hidden calculation tables if the transaction type changes
+// (so that the form will actually submit)
+const transactionTypeRadios = document.getElementsByClassName("radio_transactionType");
+const landlordInformationInputs = document.getElementById("landlord_information").getElementsByTagName("input");
+for (var i = 0; i < transactionTypeRadios.length; i++) {
+    transactionTypeRadios.item(i).addEventListener("click", transactionTypeClick);
+}
+transactionTypeClick();
+function transactionTypeClick() {
+    document.getElementById("noTransactionType").classList.add("visually-hidden");
+    // CASH
+    if (document.getElementById("rdo_cash").checked == true) {
+        if (document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_cash").classList.remove("visually-hidden");
+            // addValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
+            enableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_rto").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_stock").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("landlord_information").classList.add("visually-hidden");
+        }
+        if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("nav_landlord_information").classList.add("visually-hidden");
+            // removeValidation(document.querySelectorAll("#landlord_information input"));
+            disableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
+        }
+        for (var i = 0; i < landlordInformationInputs.length; i++) {
+            landlordInformationInputs.item(i).disabled = true;
+        }
+        if (document.getElementById("taxExempt").classList.contains("visually-hidden")) {
+            document.getElementById("taxExempt").classList.remove("visually-hidden");
+        }
+    }
+    // RTO
+    else if (document.getElementById("rdo_rto").checked == true) {
+        if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_cash").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
+        }
+        if (document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_rto").classList.remove("visually-hidden");
+            // addValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
+            enableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_stock").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
+        }
+        if (document.getElementById("landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("landlord_information").classList.remove("visually-hidden");
+            // addValidation(document.querySelectorAll("#landlord_information input"));
+            enableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
+        }
+        if (document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("nav_landlord_information").classList.remove("visually-hidden");
+        }
+        for (var i = 0; i < landlordInformationInputs.length; i++) {
+            landlordInformationInputs.item(i).disabled = false;
+        }
+        if (document.getElementById("taxExempt").classList.contains("visually-hidden")) {
+            document.getElementById("taxExempt").classList.remove("visually-hidden");
+        }
+    }
+    // STOCK
+    else if (document.getElementById("rdo_stock").checked == true) {
+        if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_cash").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_rto").classList.add("visually-hidden");
+            // removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
+            disableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
+        }
+        if (document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
+            document.getElementById("calculation_stock").classList.remove("visually-hidden");
+            // addValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
+            enableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
+        }
+        if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("landlord_information").classList.add("visually-hidden");
+        }
+        if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
+            document.getElementById("nav_landlord_information").classList.add("visually-hidden");
+            // removeValidation(document.querySelectorAll("#landlord_information input"));
+            disableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
+        }
+        for (var i = 0; i < landlordInformationInputs.length; i++) {
+            landlordInformationInputs.item(i).disabled = true;
+        }
+        if (!document.getElementById("taxExempt").classList.contains("visually-hidden")) {
+            document.getElementById("taxExempt").classList.add("visually-hidden");
+        }
+    }
+}
+
+
+// Manual pricing in calculations table
+// Enable/disable fields, update automatic/manual appropriately
+// const manualPricingCheck = document.getElementById("cbx_pricingManual");
+// manualPricingCheck.addEventListener("click", manualPricingClick);
+// var manualPrices = document.getElementsByClassName("manual-price-toggle");
+// manualPricingClick();
+// function manualPricingClick() {
+//     if (this.checked == true) {
+//         for (var i = 0; i < manualPrices.length; i++) {
+//             manualPrices.item(i).disabled = false;
+//             document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Manual]";
+//         }
+//     }
+//     else {
+//         for (var i = 0; i < manualPrices.length; i++) {
+//             manualPrices.item(i).disabled = true;
+//             document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Automatic]";
+//         }
+//     }
+// }
+
+
+// // SHOW/HIDE SECTIONS
+// const hiddenSections = document.getElementsByClassName("hidden-section");
+// for (let i = 0; i < hiddenSections.length; i++) {
+//     hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
+// }
+// showHideAllSections();
+
+// // Dynamically show/hide sections that have values in them on page load/refresh
+// // Reference: cbx_box, container_cbx_box
+// function showHideAllSections() {
+//     for (let i = 0; i < hiddenSections.length; i++) {                
+//         let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
+//         let currentField = currentValues.next();
+//         while (currentField.value != undefined) {
+//             if (currentField.value.value != '' && currentField.value.type != "checkbox") {
+//                 hiddenSections.item(i).checked = true;
+//                 document.getElementById("container_" + hiddenSections.item(i).id).classList.remove("visually-hidden");
+//                 break;
+//             }
+//             else {
+//                 currentField = currentValues.next();
+//             }
+//         }
+//     }
+// }
+
+
+// CHANGE TRACKING
+const initialValuesCol1 = [];
+const initialValuesCol2 = [];
+var editHistory = [];
+
+// Save initial values and add events
+for (let i = 0; i < allInputs.length; i++) {
+
+    // Don't include ignored fields
+    if (!allInputs.item(i).classList.contains("ignore-field")) {                
+        if (allInputs.item(i).type == "checkbox" || allInputs.item(i).type == "radio") {
+            allInputs.item(i).addEventListener("click", (event) => checkIfModified(event));
+            initialValuesCol2.push(allInputs.item(i).checked);
+        }
+        else if (allInputs.item(i).type == "date") {
+            allInputs.item(i).addEventListener("change", (event) => checkIfModified(event));
+            allInputs.item(i).addEventListener("keyup", (event) => checkIfModified(event));
+            initialValuesCol2.push(allInputs.item(i).value);
+        }
+        else {
+            allInputs.item(i).addEventListener("keyup", (event) => checkIfModified(event));
+            allInputs.item(i).addEventListener("change", (event) => checkIfModified(event));
+            allInputs.item(i).addEventListener("click", (event) => checkIfModified(event));
+            initialValuesCol2.push(allInputs.item(i).value);
+        }
+        initialValuesCol1.push(allInputs.item(i).id);
+    }
+
+}
+
+// // Show/hide sections of corresponding container to a checkbox
+// function showHideSectionsClick() {
+
+//     // Show/hide corresponding sections
+//     if (this.checked == true) {
+//         if (document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
+//             document.getElementById("container_" + this.id).classList.remove("visually-hidden");
+//         }
+//     }
+//     else {
+//         if (!document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
+//             document.getElementById("container_" + this.id).classList.add("visually-hidden");
+//         }
+//     }
+
+//     // Add required tags to elements
+//     var fieldsContainer = document.getElementById("container_" + this.id);
+    
+//     // Make sure there are any required fields inside of shown/hidden container
+//     if (fieldsContainer.getElementsByClassName("required-toggle").item(0) != null) {
+
+//         var requiredFields = document.getElementsByClassName("required-toggle");
+
+//         // When container is open, require all corresponding fields
+//         if (this.checked) {
+//             for (let i = 0; i < requiredFields.length; i++) {
+//                 requiredFields.item(i).required = true;
+//             }
+//         }
+//         // When container is closed, remove requirement for all corresponding fields
+//         else {
+//             for (let i = 0; i < requiredFields.length; i++) {
+//                 requiredFields.item(i).required = false;
+//             }
+//         }
+//     }
+
+//     // Remove changes from edit history when field is closed
+//     // No save necessary since fields will be cleared if form is exited or save is pressed elsewhere
+//     let fields = fieldsContainer.getElementsByTagName("input");
+//     // Check if there are any fields to track changes of
+//     if (fields.item(0) != null) {
+//         // When section is shown add fields to edit history tracking
+//         // and fields to validator
+//         if (this.checked) {
+//             addValidation(fieldsContainer.querySelectorAll("input"));
+//             for (let i = 0; i < fields.length; i++) {                        
+//                 if (fields.item(i).type != "checkbox") {
+//                     if (fields.item(i).disabled) {
+//                         fields.item(i).disabled = false;
+//                         fields.item(i).click();
+//                         fields.item(i).disabled = true;
+//                     }
+//                     else {
+//                         fields.item(i).click();
+//                     }
+//                 }
+                
+//             }
+//         }
+//         // When section is hidden, remove inputs in this section from the edit history
+//         // and remove validation fields from validator
+//         else {
+//             removeValidation(fieldsContainer.querySelectorAll("input"));
+
+//             for (let i = 0; i < fields.length; i++) {
+//                 if (editHistory.includes(fields.item(i).id)) {
+//                     editHistory.splice(editHistory.indexOf(fields.item(i).id), 1);
+//                 }
+//             }
+//             checkEditHistory();
+//         }
+//     }
+
+
+// }
+
+// Listener function
+var proceed;
+function checkIfModified(event) {
+
+    // console.log(event.target);
+    // console.log(event.target.id);
+    // console.log(event.type);
+    proceed = false;
+
+    if (event.target.classList.contains("ignore-field")) {
+        proceed = false;
+    }
+    else if (event.type == "keyup") {
+        // Have to ignore Tab keyups for some weird situations
+        if (event.code == "Tab") {
+            proceed = false;
+        }
+        else {
+            proceed = true;
+        }
+    }
+    else {
+        proceed = true;
+    }
+    
+    if (proceed) {
+
+        // Checkboxes are weird
+        if (event.target.type == "checkbox") {
+
+            if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                && !editHistory.includes(event.target.id)) {
+                editHistory.push(event.target.id);
+                event.target.classList.add("edited");
+            }
+            else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                && editHistory.includes(event.target.id)) {
+                // Do nothing
+            }
+            else if (editHistory.includes(event.target.id)) {
+                editHistory.splice(editHistory.indexOf(event.target.id), 1);
+                event.target.classList.remove("edited");
+            }
+
+        }
+        // Radios are even weirder
+        else if (event.target.type == "radio") {
+
+            if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                && !editHistory.includes(event.target.name)) {
+                editHistory.push(event.target.name);
+                document.getElementById(event.target.name).classList.add("edited");
+            }
+            else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.checked
+                && editHistory.includes(event.target.name)) {
+                // Do nothing
+            }
+            else if (editHistory.includes(event.target.name)) {
+                editHistory.splice(editHistory.indexOf(event.target.name), 1);
+                document.getElementById(event.target.name).classList.remove("edited");
+            }
+
+        }
+        // Other elements are fine
+        else {
+
+            if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value
+                && !editHistory.includes(event.target.id)) {
+                editHistory.push(event.target.id);
+                event.target.classList.add("edited");
+            }
+            else if (initialValuesCol2[initialValuesCol1.indexOf(event.target.id)] != event.target.value 
+                && editHistory.includes(event.target.id)) {
+                // Do nothing
+            }
+            else if (editHistory.includes(event.target.id)) {
+                editHistory.splice(editHistory.indexOf(event.target.id), 1);
+                event.target.classList.remove("edited");
+            }
+
+        }
+        checkEditHistory();
+    }
+}
+
+// Check if any edits are remaining
+function checkEditHistory() {
+    // console.log(editHistory);
+    if (editHistory.length == 0) {
+        document.getElementById("save_button").disabled = true;
+        document.getElementById("save_button").innerHTML = "No changes";
+    }
+    else {
+        document.getElementById("save_button").disabled = false;
+        document.getElementById("save_button").innerHTML = "Save changes";
+    }
+}
+
+
+// Save with ctrl + s
+document.addEventListener("keydown", e => {
+    if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
+        // Prevent the Save dialog to open
+        e.preventDefault();
+        // Place your code here
+        document.getElementById("save_button").click();
+    }
+});

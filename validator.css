@@ -8,11 +8,12 @@
 /* Styling for valid/invalid fields */
 .check-is-valid:focus {
     border: 1px solid green !important;
-    box-shadow: none !important;
+    box-shadow: 0px 0px 0px 4px rgba(33, 147, 84, 0.337) !important;
     background-color: rgba(228, 251, 228, 0.6);
 }
 .check-is-invalid, .check-is-invalid:focus {
     border: 1px solid rgb(235, 55, 55);
+    box-shadow: 0px 0px 0px 4px rgba(242, 116, 116, 0.437) !important;
     background-color: rgb(255, 241, 241) !important;
     color: rgb(200, 39, 39);
 }

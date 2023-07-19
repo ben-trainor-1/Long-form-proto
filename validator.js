@@ -34,7 +34,7 @@
 // Wait for document to be loaded fully
 document.addEventListener("DOMContentLoaded", () => {
 
-    initializeValidator("yesValidation");
+    initializeValidator("save_button_container");
 
 });
 
@@ -188,12 +188,12 @@ function applyStyle(inputId, state) {
     }
 }
 
-// Re-enables validation for previously hidden fields; takes in a document.getElementsByClassName() call
-function enableValidation(elements) {
-    for (var i = 0; i < elements.length; i++) {
-        if (elements.item(i).classList.contains("check-ignore")) {
-            elements.item(i).classList.remove("check-ignore");
-            elements.item(i).click();
+// Re-enables validation for previously hidden fields; takes in a set of elements
+function enableValidation(listOfElements) {
+    for (var i = 0; i < listOfElements.length; i++) {
+        if (listOfElements.item(i).classList.contains("check-ignore")) {
+            listOfElements.item(i).classList.remove("check-ignore");
+            listOfElements.item(i).click();
         }
     }
 }
@@ -212,7 +212,7 @@ function disableValidation(elements) {
 
 // Check if whole form is valid
 function formIsValid(buttonId) {
-    clickAllFields(document.getElementById(buttonId).name); // Click all fields in corresponding container
+    clickAllFields(buttonId + "_container"); // Click all fields in corresponding container
     if (document.getElementsByClassName("check-is-invalid").length == 0) {
         return true;
     }
@@ -237,14 +237,50 @@ function clickAllFields(containerId) {
 
 // For submit button to check validation before clicking hidden asp button
 // Clicks the trigger first
-function trySubmitForm(aspButton) {
-    if (formIsValid(aspButton + "_trigger")) {
+function trySubmitForm(event) {
+    console.log("Trying to submit form");
+    if (formIsValid(event.target.id)) {
         console.log("Form validated successfully.");
-        const theButton = document.getElementById(aspButton);
+        const theButton = document.getElementById(event.target.id + "_invisButton");
         theButton.click();
     }
 }
 
 function printClicked() {
     console.log("clicked invis button");
+}
+
+
+
+// Auto format certain types of fields
+
+// Auto format phone numbers
+function phoneMask() { 
+    var num = $(this).val().replace(/\D/g,''); 
+    if (num.length < 4) {
+        $(this).val(num.substring(0,num.length));
+    }
+    else if (num.length < 7) {
+        $(this).val('(' + num.substring(0,3) + ') ' + num.substring(3,6));
+    }
+    else {
+        $(this).val('(' + num.substring(0,3) + ') ' + num.substring(3,6) + '-' + num.substring(6,10)); 
+    }
+}
+
+// Auto format zip codes
+function zipMask() { 
+    var num = $(this).val().replace(/\D/g,'');
+    if (num.length < 6) {
+        $(this).val(num.substring(0, num.length));
+    }
+    else {
+        $(this).val(num.substring(0,5) + "-" + num.substring(5,9)); 
+    }
+}
+
+// Auto format SSN (last 4 digits)
+function ssnMask() { 
+    var num = $(this).val().replace(/\D/g,'');
+    $(this).val(num.substring(0, 4));
 }
