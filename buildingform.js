@@ -238,51 +238,24 @@ function transactionTypeClick() {
 
 // Manual pricing in calculations table
 // Enable/disable fields, update automatic/manual appropriately
-// const manualPricingCheck = document.getElementById("cbx_pricingManual");
-// manualPricingCheck.addEventListener("click", manualPricingClick);
-// var manualPrices = document.getElementsByClassName("manual-price-toggle");
-// manualPricingClick();
-// function manualPricingClick() {
-//     if (this.checked == true) {
-//         for (var i = 0; i < manualPrices.length; i++) {
-//             manualPrices.item(i).disabled = false;
-//             document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Manual]";
-//         }
-//     }
-//     else {
-//         for (var i = 0; i < manualPrices.length; i++) {
-//             manualPrices.item(i).disabled = true;
-//             document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Automatic]";
-//         }
-//     }
-// }
-
-
-// // SHOW/HIDE SECTIONS
-// const hiddenSections = document.getElementsByClassName("hidden-section");
-// for (let i = 0; i < hiddenSections.length; i++) {
-//     hiddenSections.item(i).addEventListener("click", showHideSectionsClick);
-// }
-// showHideAllSections();
-
-// // Dynamically show/hide sections that have values in them on page load/refresh
-// // Reference: cbx_box, container_cbx_box
-// function showHideAllSections() {
-//     for (let i = 0; i < hiddenSections.length; i++) {                
-//         let currentValues = document.getElementById("container_" + hiddenSections.item(i).id).querySelectorAll("input").values();
-//         let currentField = currentValues.next();
-//         while (currentField.value != undefined) {
-//             if (currentField.value.value != '' && currentField.value.type != "checkbox") {
-//                 hiddenSections.item(i).checked = true;
-//                 document.getElementById("container_" + hiddenSections.item(i).id).classList.remove("visually-hidden");
-//                 break;
-//             }
-//             else {
-//                 currentField = currentValues.next();
-//             }
-//         }
-//     }
-// }
+const manualPricingCheck = document.getElementById("cbx_pricingManual");
+manualPricingCheck.addEventListener("click", manualPricingClick);
+var manualPrices = document.getElementsByClassName("manual-price-toggle");
+manualPricingCheck.click();
+function manualPricingClick(event) {
+    if (event.target.checked == true) {
+        for (var i = 0; i < manualPrices.length; i++) {
+            manualPrices.item(i).disabled = false;
+            document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Manual]";
+        }
+    }
+    else {
+        for (var i = 0; i < manualPrices.length; i++) {
+            manualPrices.item(i).disabled = true;
+            document.getElementById("auto_" + manualPrices.item(i).id).innerHTML = "[Automatic]";
+        }
+    }
+}
 
 
 // CHANGE TRACKING
@@ -315,82 +288,6 @@ for (let i = 0; i < allInputs.length; i++) {
 
 }
 
-// // Show/hide sections of corresponding container to a checkbox
-// function showHideSectionsClick() {
-
-//     // Show/hide corresponding sections
-//     if (this.checked == true) {
-//         if (document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
-//             document.getElementById("container_" + this.id).classList.remove("visually-hidden");
-//         }
-//     }
-//     else {
-//         if (!document.getElementById("container_" + this.id).classList.contains("visually-hidden")) {
-//             document.getElementById("container_" + this.id).classList.add("visually-hidden");
-//         }
-//     }
-
-//     // Add required tags to elements
-//     var fieldsContainer = document.getElementById("container_" + this.id);
-    
-//     // Make sure there are any required fields inside of shown/hidden container
-//     if (fieldsContainer.getElementsByClassName("required-toggle").item(0) != null) {
-
-//         var requiredFields = document.getElementsByClassName("required-toggle");
-
-//         // When container is open, require all corresponding fields
-//         if (this.checked) {
-//             for (let i = 0; i < requiredFields.length; i++) {
-//                 requiredFields.item(i).required = true;
-//             }
-//         }
-//         // When container is closed, remove requirement for all corresponding fields
-//         else {
-//             for (let i = 0; i < requiredFields.length; i++) {
-//                 requiredFields.item(i).required = false;
-//             }
-//         }
-//     }
-
-//     // Remove changes from edit history when field is closed
-//     // No save necessary since fields will be cleared if form is exited or save is pressed elsewhere
-//     let fields = fieldsContainer.getElementsByTagName("input");
-//     // Check if there are any fields to track changes of
-//     if (fields.item(0) != null) {
-//         // When section is shown add fields to edit history tracking
-//         // and fields to validator
-//         if (this.checked) {
-//             addValidation(fieldsContainer.querySelectorAll("input"));
-//             for (let i = 0; i < fields.length; i++) {                        
-//                 if (fields.item(i).type != "checkbox") {
-//                     if (fields.item(i).disabled) {
-//                         fields.item(i).disabled = false;
-//                         fields.item(i).click();
-//                         fields.item(i).disabled = true;
-//                     }
-//                     else {
-//                         fields.item(i).click();
-//                     }
-//                 }
-                
-//             }
-//         }
-//         // When section is hidden, remove inputs in this section from the edit history
-//         // and remove validation fields from validator
-//         else {
-//             removeValidation(fieldsContainer.querySelectorAll("input"));
-
-//             for (let i = 0; i < fields.length; i++) {
-//                 if (editHistory.includes(fields.item(i).id)) {
-//                     editHistory.splice(editHistory.indexOf(fields.item(i).id), 1);
-//                 }
-//             }
-//             checkEditHistory();
-//         }
-//     }
-
-
-// }
 
 // Listener function
 var proceed;
