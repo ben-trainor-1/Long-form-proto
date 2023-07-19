@@ -141,17 +141,14 @@ function transactionTypeClick() {
     if (document.getElementById("rdo_cash").checked == true) {
         if (document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
             document.getElementById("calculation_cash").classList.remove("visually-hidden");
-            // addValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
             enableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
             document.getElementById("calculation_rto").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
             document.getElementById("calculation_stock").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
@@ -159,7 +156,6 @@ function transactionTypeClick() {
         }
         if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
             document.getElementById("nav_landlord_information").classList.add("visually-hidden");
-            // removeValidation(document.querySelectorAll("#landlord_information input"));
             disableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
         }
         for (var i = 0; i < landlordInformationInputs.length; i++) {
@@ -173,22 +169,18 @@ function transactionTypeClick() {
     else if (document.getElementById("rdo_rto").checked == true) {
         if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
             document.getElementById("calculation_cash").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
         }
         if (document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
             document.getElementById("calculation_rto").classList.remove("visually-hidden");
-            // addValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
             enableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
             document.getElementById("calculation_stock").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
         }
         if (document.getElementById("landlord_information").classList.contains("visually-hidden")) {
             document.getElementById("landlord_information").classList.remove("visually-hidden");
-            // addValidation(document.querySelectorAll("#landlord_information input"));
             enableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
         }
         if (document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
@@ -205,17 +197,14 @@ function transactionTypeClick() {
     else if (document.getElementById("rdo_stock").checked == true) {
         if (!document.getElementById("calculation_cash").classList.contains("visually-hidden")) {
             document.getElementById("calculation_cash").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_cash").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_cash").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("calculation_rto").classList.contains("visually-hidden")) {
             document.getElementById("calculation_rto").classList.add("visually-hidden");
-            // removeValidation(document.getElementById("calculation_rto").querySelectorAll("input"));
             disableValidation(document.getElementById("calculation_rto").querySelectorAll("input.check-valid-input"));
         }
         if (document.getElementById("calculation_stock").classList.contains("visually-hidden")) {
             document.getElementById("calculation_stock").classList.remove("visually-hidden");
-            // addValidation(document.getElementById("calculation_stock").querySelectorAll("input"));
             enableValidation(document.getElementById("calculation_stock").querySelectorAll("input.check-valid-input"));
         }
         if (!document.getElementById("landlord_information").classList.contains("visually-hidden")) {
@@ -223,7 +212,6 @@ function transactionTypeClick() {
         }
         if (!document.getElementById("nav_landlord_information").classList.contains("visually-hidden")) {
             document.getElementById("nav_landlord_information").classList.add("visually-hidden");
-            // removeValidation(document.querySelectorAll("#landlord_information input"));
             disableValidation(document.getElementById("nav_landlord_information").querySelectorAll("input.check-valid-input"));
         }
         for (var i = 0; i < landlordInformationInputs.length; i++) {
