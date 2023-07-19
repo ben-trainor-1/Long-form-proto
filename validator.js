@@ -268,13 +268,10 @@ function trySubmitForm(event) {
     }
 }
 
+// Just for testing the invisible button
 function printClicked() {
-    console.log("clicked invis button");
+    console.log("Clicked invis button");
 }
-
-
-
-// Auto format certain types of fields
 
 // Auto format phone numbers
 function phoneMask() { 
