@@ -213,10 +213,12 @@ function disableValidation(elements) {
 // Check if whole form is valid
 function formIsValid(buttonId) {
     clickAllFields(buttonId + "_container"); // Click all fields in corresponding container
-    if (document.getElementsByClassName("check-is-invalid").length == 0) {
+    var invalidElements = document.getElementsByClassName("check-is-invalid");
+    if (invalidElements.length == 0) {
         return true;
     }
     else {
+        invalidElements.item(0).scrollIntoView();
         return false;
     }
 }
