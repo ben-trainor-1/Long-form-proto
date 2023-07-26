@@ -239,6 +239,7 @@ function formIsValid(buttonId) {
     }
     else {
         invalidElements.item(0).scrollIntoView();
+        invalidElements.item(0).focus();
         return false;
     }
 }
